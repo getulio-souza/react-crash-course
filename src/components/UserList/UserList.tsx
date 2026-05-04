@@ -2,7 +2,8 @@ import './userList.css'
 
 export function UserList(){
     return(
-        <>
+      <>
+        <h2>lista de usuarios</h2>
         <table>
             <tr>
                 <th>Name</th>
