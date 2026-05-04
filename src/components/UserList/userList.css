@@ -1,0 +1,55 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  /* junta as bordas */
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Borda geral */
+table,
+th,
+td {
+  border: 1px solid #d1d5db;
+}
+
+/* Cabeçalho */
+thead {
+  background-color: #1e293b;
+  color: white;
+}
+
+th {
+  padding: 12px;
+  text-align: left;
+}
+
+/* Células */
+td {
+  padding: 12px;
+}
+
+/* Linhas alternadas */
+tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+/* Hover */
+tbody tr:hover {
+  background-color: #e5e7eb;
+  transition: 0.2s;
+}
+
+/* Botão */
+button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}

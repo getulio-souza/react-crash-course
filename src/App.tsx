@@ -1,5 +1,5 @@
 import './App.css'
-import { UserCard } from "./components/userCard/userCard";
+import {UserForm } from "./components/userCard/userCard";
 import { UserList } from "./components/UserList/userList";
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <>
      <section>
       <UserList/>
-      <UserCard/>
+      <UserForm/>
      </section>
     </>
   )
