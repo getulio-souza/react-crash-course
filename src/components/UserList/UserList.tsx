@@ -2,18 +2,21 @@ import './userList.css'
 
 type Props = {
     users: any[];
+    setEditUser: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export function UserList({users}: Props){
+
+export function UserList({users, setEditUser}: Props){
 
     function onDeleteUser(){
         console.log('usuario deletado!')
-    
     }
 
-    function onEditUser(){
-        console.log('usuario editado')
+    function onEditUser(selectedUser: any){
+        ///quando eu clicar em editar, eu preciso enviar os dados do usuario selecionado para o formulario
+        console.log('usuario selecionado:',selectedUser)
 
+        setEditUser(selectedUser)
     }
 
     return(
@@ -22,6 +25,7 @@ export function UserList({users}: Props){
         <table>
           <thead>
             <tr>
+                <th>id</th>
                 <th>Name</th>
                 <th>age</th>
                 <th>Ocupation</th>
@@ -31,11 +35,12 @@ export function UserList({users}: Props){
             <tbody>
                 {users.map((user, index)=> (
                     <tr key={index}>
+                        <td>{user.id}</td>
                         <td>{user.name}</td>
                         <td>{user.age}</td>
                         <td>{user.occupation}</td>
                         <td>
-                            <button style={{marginBottom: '10px'}} onClick={onEditUser}>Editar</button>
+                            <button style={{marginBottom: '10px'}} onClick={()=> onEditUser(user)}>Editar</button>
                             <button onClick={onDeleteUser}>Deletar</button>
                         </td>
                     </tr>
