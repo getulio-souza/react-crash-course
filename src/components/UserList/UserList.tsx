@@ -5,6 +5,17 @@ type Props = {
 }
 
 export function UserList({users}: Props){
+
+    function onDeleteUser(){
+        console.log('usuario deletado!')
+    
+    }
+
+    function onEditUser(){
+        console.log('usuario editado')
+
+    }
+
     return(
       <>
         <h2>lista de usuarios</h2>
@@ -23,6 +34,10 @@ export function UserList({users}: Props){
                         <td>{user.name}</td>
                         <td>{user.age}</td>
                         <td>{user.occupation}</td>
+                        <td>
+                            <button style={{marginBottom: '10px'}} onClick={onEditUser}>Editar</button>
+                            <button onClick={onDeleteUser}>Deletar</button>
+                        </td>
                     </tr>
                 ))}
             </tbody>
