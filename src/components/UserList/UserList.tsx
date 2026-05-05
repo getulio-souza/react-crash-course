@@ -33,6 +33,7 @@ export function UserList({users, setEditUser}: Props){
             </tr>
           </thead>
             <tbody>
+                {users.length === 0 && (<div style={{color: 'red', fontWeight: 'bold', padding: '10px'}}>sem usuarios para exibir</div>)}
                 {users.map((user, index)=> (
                     <tr key={index}>
                         <td>{user.id}</td>
