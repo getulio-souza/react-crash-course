@@ -1,6 +1,10 @@
 import './userList.css'
 
-export function UserList(){
+type Props = {
+    users: any[];
+}
+
+export function UserList({users}: Props){
     return(
       <>
         <h2>lista de usuarios</h2>
@@ -14,12 +18,13 @@ export function UserList(){
             </tr>
           </thead>
             <tbody>
-                <tr>
-                    <td>getulio</td>
-                    <td>34</td>
-                    <td>developer</td>
-                    <td><button>deletar</button></td>
-                </tr>
+                {users.map((user, index)=> (
+                    <tr key={index}>
+                        <td>{user.name}</td>
+                        <td>{user.age}</td>
+                        <td>{user.occupation}</td>
+                    </tr>
+                ))}
             </tbody>
         </table>
         </>
