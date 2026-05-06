@@ -10,10 +10,12 @@ function App() {
 
   return (
     <>
+
      <section>
       <UserForm setUsers={setUsers} editUser={editUser}/>
       <UserList users={users} setEditUser={setEditUser}/>
      </section>
+
     </>
   )
 }

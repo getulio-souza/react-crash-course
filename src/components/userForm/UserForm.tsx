@@ -37,6 +37,9 @@ export function UserForm({ setUsers, editUser }: Props) {
     //salvando os dados informados para serem exibidos na tabela
     const newUser = { id, name, age, occupation };
 
+    //salvando o usuario cadastrado no localStorage
+    localStorage.setItem('newUser', JSON.stringify(newUser))
+
     setUsers((prev) => {
       if (editUser) {
         return prev.map((user) => (user.id === editUser.id ? newUser : user));
