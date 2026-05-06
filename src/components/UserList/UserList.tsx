@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './userList.css'
 
 type Props = {
@@ -18,6 +19,12 @@ export function UserList({users, setEditUser}: Props){
 
         setEditUser(selectedUser)
     }
+
+    useEffect(()=> {
+       console.log('chamou o useEffect!')
+
+       //aqui eu pego o usuario que salvei no localStorage e exibo na tabela
+    }, [])
 
     return(
       <>
