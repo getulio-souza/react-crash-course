@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import './userList.css'
 
 type Props = {
@@ -7,7 +6,15 @@ type Props = {
 }
 
 
-export function UserList({users, setEditUser}: Props){
+export function UserList({users, setEditUser}: Props){    
+    const usersFromLocal: any = localStorage.getItem('newUser')
+
+    const usersParsed = JSON.parse(usersFromLocal)
+    console.log(usersParsed)
+
+    const updatedUsers = [];
+
+    updatedUsers.push(usersParsed)
 
     function onDeleteUser(){
         console.log('usuario deletado!')
@@ -19,12 +26,6 @@ export function UserList({users, setEditUser}: Props){
 
         setEditUser(selectedUser)
     }
-
-    useEffect(()=> {
-       console.log('chamou o useEffect!')
-
-       //aqui eu pego o usuario que salvei no localStorage e exibo na tabela
-    }, [])
 
     return(
       <>
@@ -40,13 +41,13 @@ export function UserList({users, setEditUser}: Props){
             </tr>
           </thead>
             <tbody>
-                {users.length === 0 && (<div style={{color: 'red', fontWeight: 'bold', padding: '10px'}}>sem usuarios para exibir</div>)}
-                {users.map((user, index)=> (
+                {updatedUsers.length === 0 && (<div style={{color: 'red', fontWeight: 'bold', padding: '10px'}}>sem usuarios para exibir</div>)}
+                {updatedUsers.map((user: any, index: any)=> (
                     <tr key={index}>
-                        <td>{user.id}</td>
-                        <td>{user.name}</td>
-                        <td>{user.age}</td>
-                        <td>{user.occupation}</td>
+                        <td>{user?.id}</td>
+                        <td>{user?.name}</td>
+                        <td>{user?.age}</td>
+                        <td>{user?.occupation}</td>
                         <td>
                             <button style={{marginBottom: '10px'}} onClick={()=> onEditUser(user)}>Editar</button>
                             <button onClick={onDeleteUser}>Deletar</button>

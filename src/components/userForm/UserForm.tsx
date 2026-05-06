@@ -12,15 +12,24 @@ export function UserForm({ setUsers, editUser }: Props) {
   const [age, setAge] = useState("");
   const [occupation, setOccupation] = useState("");
 
-  console.log("editUser:", editUser);
-
   useEffect(() => {
     if (editUser) {
       setName(editUser.name || "");
       setAge(editUser.age || "");
       setOccupation(editUser.occupation || "");
     }
-  }, [editUser]);
+
+    //resgatando os dados que já existem no localStorage
+    const storedUsers = JSON.parse(localStorage.getItem('newUser') || '')
+    
+    if(!storedUsers) return;
+
+    if(Array.isArray(storedUsers)){
+      setUsers(storedUsers)
+    } 
+
+
+  }, []);
 
   function SubmitForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -32,25 +41,63 @@ export function UserForm({ setUsers, editUser }: Props) {
     const age: string = form.get("age") as string;
     const occupation: string = form.get("occupation") as string;
 
-    console.log({ name, age, occupation });
-
-    //salvando os dados informados para serem exibidos na tabela
+    //criando o objeto newUser
     const newUser = { id, name, age, occupation };
+    console.log('new user:', newUser)
 
-    //salvando o usuario cadastrado no localStorage
-    localStorage.setItem('newUser', JSON.stringify(newUser))
+    let newUsersList: any[] = [];
 
-    setUsers((prev) => {
-      if (editUser) {
-        return prev.map((user) => (user.id === editUser.id ? newUser : user));
+    //obtendo os usuarios já guardados no localStorage
+    let previousUsers = localStorage.getItem('newUser');
+    console.log('previousUsers:', previousUsers)
+
+    if(previousUsers){
+      console.log('EXISTE DADOS NO localStorage')
+
+      //se houver dados no localStorage, converta para o formato com JSON.parse
+      previousUsers = JSON.parse(previousUsers);
+
+      //verifica se é um array
+      if(Array.isArray(previousUsers)){
+        console.log('É ARRAY')
+        newUsersList = [newUser, ...previousUsers];
       }
-      return [...prev, newUser];
-    });
+
+      //SE NAO FOR UM ARRAY
+      else{
+        console.log('NAO É ARRAY')
+        //TRANSFORMAR O OBJETO EM UMA LISTA E INCLUIR O NOVO USUARIO
+        newUsersList = [previousUsers, newUser];
+
+      }
+    } else{
+      //se nao existir nada no localStorage, começa com o primeiro cadastro
+      newUsersList = [newUser]
+    }
+
+    console.log(newUsersList)
+
+    
+    // //salvando o usuario cadastrado no localStorage
+    // localStorage.setItem('newUser', JSON.stringify(newUser))
+
+
+    // setUsers((prev) => {
+    //   console.log('prev:', prev)
+    //   if (editUser) {
+    //     return prev.map((user) => (user.id === editUser.id ? newUser : user));
+    //   } else{
+    //     return [...prev, newUser];
+    //   }
+    // });
+    
+    
 
     //limpa os campos do formulário depois de gravar os dados
     setName("");
     setAge("");
     setOccupation("");
+
   }
 
   return (
