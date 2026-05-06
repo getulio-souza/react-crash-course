@@ -75,23 +75,7 @@ export function UserForm({ setUsers, editUser }: Props) {
       newUsersList = [newUser]
     }
 
-    console.log(newUsersList)
-
-    
-    // //salvando o usuario cadastrado no localStorage
-    // localStorage.setItem('newUser', JSON.stringify(newUser))
-
-
-    // setUsers((prev) => {
-    //   console.log('prev:', prev)
-    //   if (editUser) {
-    //     return prev.map((user) => (user.id === editUser.id ? newUser : user));
-    //   } else{
-    //     return [...prev, newUser];
-    //   }
-    // });
-    
-    
+    console.log(newUsersList)  
 
     //limpa os campos do formulário depois de gravar os dados
     setName("");
