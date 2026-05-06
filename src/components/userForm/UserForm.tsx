@@ -52,7 +52,7 @@ export function UserForm({ setUsers, editUser }: Props) {
     console.log('previousUsers:', previousUsers)
 
     if(previousUsers){
-      console.log('EXISTE DADOS NO localStorage')
+      console.log('Existe usuarios no localStorage!')
 
       //se houver dados no localStorage, converta para o formato com JSON.parse
       previousUsers = JSON.parse(previousUsers);
@@ -71,11 +71,18 @@ export function UserForm({ setUsers, editUser }: Props) {
 
       }
     } else{
+      console.log('NAO Existe usuarios no localStorage! Gravando o primeiro usuário...')
       //se nao existir nada no localStorage, começa com o primeiro cadastro
       newUsersList = [newUser]
     }
 
     console.log(newUsersList)  
+
+    //salvando os dados novos e antigos no localStorage
+    
+
+    //atualizando o state
+    //setUsers()
 
     //limpa os campos do formulário depois de gravar os dados
     setName("");
