@@ -8,6 +8,7 @@ type Props = {
 };
 
 export function UserForm({ setUsers, editUser }: Props) {
+
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [occupation, setOccupation] = useState("");
@@ -19,8 +20,6 @@ export function UserForm({ setUsers, editUser }: Props) {
       setName(editUser.name || "");
       setAge(editUser.age || "");
       setOccupation(editUser.occupation || "");
-    } else {
-      console.log("edit user NAO existe:", editUser);
     }
   }, [editUser]);
 
@@ -36,9 +35,7 @@ export function UserForm({ setUsers, editUser }: Props) {
   }, []);
 
   //se o array de dependencias estiver vazio, ele vai rodar apenas uma vez
-  //nesse caso queremos que ele rode sempre que editUser mudar (o usuario selecionar um usuario diferente na)
-
-  function SubmitForm(event: React.FormEvent<HTMLFormElement>){
+  //nesse caso queremos que ele rode sempre que editUser mudar (o usuario selecionar um usuario diferente na tabela)
 
     event.preventDefault();
 
