@@ -7,7 +7,7 @@ type Props = {
 
 
 export function UserList({users, setEditUser}: Props){    
-    console.log('users no user list:', users)
+    // console.log('users no user list:', users)
 
     function onDeleteUser(){
         console.log('usuario deletado!')

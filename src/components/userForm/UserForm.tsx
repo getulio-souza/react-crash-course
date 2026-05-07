@@ -12,25 +12,29 @@ export function UserForm({ setUsers, editUser }: Props) {
   const [age, setAge] = useState("");
   const [occupation, setOccupation] = useState("");
 
+  //para mostrar o usuario editado no formulario
   useEffect(() => {
     if (editUser) {
       setName(editUser.name || "");
       setAge(editUser.age || "");
       setOccupation(editUser.occupation || "");
     }
+  }, [editUser]);
 
-    //resgatando os dados que já existem no localStorage
-    // const storedUsers = JSON.parse(localStorage.getItem('newUser') || '')
-    const storedUsers =localStorage.getItem('newUser');
+
+  //use effect para os usuarios do localStorage
+  useEffect(()=> {
+    const storedUsers = JSON.parse(localStorage.getItem('newUser') || '')
     
     if(!storedUsers) return;
 
     if(Array.isArray(storedUsers)){
       setUsers(storedUsers)
     } 
+  },[])
 
-
-  }, []);
+  //se o array de dependencias estiver vazio, ele vai rodar apenas uma vez
+  //nesse caso queremos que ele rode sempre que editUser mudar (o usuario selecionar um usuario diferente na tabela)
 
   function SubmitForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
