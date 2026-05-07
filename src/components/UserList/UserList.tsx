@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import './userList.css'
 
 type Props = {
@@ -8,6 +7,7 @@ type Props = {
 
 
 export function UserList({users, setEditUser}: Props){    
+    console.log('users no user list:', users)
 
     function onDeleteUser(){
         console.log('usuario deletado!')
@@ -20,9 +20,6 @@ export function UserList({users, setEditUser}: Props){
         setEditUser(selectedUser)
     }
 
-    useEffect(()=> {
-        
-    }, [])
 
     return (
       <>
