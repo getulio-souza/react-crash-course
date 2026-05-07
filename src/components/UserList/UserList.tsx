@@ -21,7 +21,7 @@ export function UserList({users, setEditUser}: Props){
     }
 
     useEffect(()=> {
-       console.log('chamou o useEffect!')
+        
     }, [])
 
     return (

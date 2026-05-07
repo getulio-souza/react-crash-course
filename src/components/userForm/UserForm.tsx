@@ -60,7 +60,6 @@ export function UserForm({ setUsers, editUser }: Props) {
 
       //verifica se é um array
       if(Array.isArray(previousUsers)){
-        console.log('É ARRAY')
         newUsersList = [newUser, ...previousUsers];
       }
 
@@ -80,17 +79,15 @@ export function UserForm({ setUsers, editUser }: Props) {
     console.log(newUsersList)  
 
     //salvando os dados novos e antigos no localStorage
-    localStorage.setItem('newUsersList', JSON.stringify(newUsersList))
-    
+    localStorage.setItem('newUser', JSON.stringify(newUsersList))
 
     //atualizando o state
-    //setUsers()
+    setUsers(newUsersList)
 
     //limpa os campos do formulário depois de gravar os dados
     setName("");
     setAge("");
     setOccupation("");
-
   }
 
   return (
