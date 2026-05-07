@@ -15,80 +15,101 @@ export function UserForm({ setUsers, editUser }: Props) {
   //para mostrar o usuario editado no formulario
   useEffect(() => {
     if (editUser) {
+      console.log("edit user existe:", editUser);
       setName(editUser.name || "");
       setAge(editUser.age || "");
       setOccupation(editUser.occupation || "");
+    } else {
+      console.log("edit user NAO existe:", editUser);
     }
   }, [editUser]);
 
-
   //use effect para os usuarios do localStorage
-  useEffect(()=> {
-    const storedUsers = JSON.parse(localStorage.getItem('newUser') || '')
-    
-    if(!storedUsers) return;
+  useEffect(() => {
+    const storedUsers = JSON.parse(localStorage.getItem("newUser") || "[]");
 
-    if(Array.isArray(storedUsers)){
-      setUsers(storedUsers)
-    } 
-  },[])
+    if (!storedUsers) return;
+
+    if (Array.isArray(storedUsers)) {
+      setUsers(storedUsers);
+    }
+  }, []);
 
   //se o array de dependencias estiver vazio, ele vai rodar apenas uma vez
-  //nesse caso queremos que ele rode sempre que editUser mudar (o usuario selecionar um usuario diferente na tabela)
+  //nesse caso queremos que ele rode sempre que editUser mudar (o usuario selecionar um usuario diferente na)
 
-  function SubmitForm(event: React.FormEvent<HTMLFormElement>) {
+  function SubmitForm(event: React.FormEvent<HTMLFormElement>){
+
     event.preventDefault();
 
     const form: FormData = new FormData(event.currentTarget);
 
-    const id: number = Math.floor(Math.random() * 1000);
-    const name: string = form.get("name") as string;
-    const age: string = form.get("age") as string;
-    const occupation: string = form.get("occupation") as string;
+    const newUser = getFormData(form);
 
-    //criando o objeto newUser
-    const newUser = { id, name, age, occupation };
-    console.log('new user:', newUser)
+    const previousUsers = getUsersFromLocalStorage();
 
-    let newUsersList: any[] = [];
+    const updatedUsers = editUser ? updateUser(previousUsers, newUser) : createUser(previousUsers, newUser)
+    
+    localStorage.setItem('newUser', JSON.stringify(updatedUsers))
 
-    //obtendo os usuarios já guardados no localStorage
-    let previousUsers = localStorage.getItem('newUser');
-    console.log('previousUsers:', previousUsers)
+    saveUsers(updatedUsers)
 
-    if(previousUsers){
-      console.log('Existe usuarios no localStorage!')
+    clearForm();
+  }
 
-      //se houver dados no localStorage, converta para o formato com JSON.parse
-      previousUsers = JSON.parse(previousUsers);
 
-      //verifica se é um array
-      if(Array.isArray(previousUsers)){
-        newUsersList = [newUser, ...previousUsers];
-      }
+  //pegando dados do formulario
+  function getFormData(form: FormData){
+    const id = editUser?.id || Math.floor(Math.random() * 1000);
 
-      //SE NAO FOR UM ARRAY
-      else{
-        console.log('NAO É ARRAY')
-        //TRANSFORMAR O OBJETO EM UMA LISTA E INCLUIR O NOVO USUARIO
-        newUsersList = [previousUsers, newUser];
-
-      }
-    } else{
-      console.log('NAO Existe usuarios no localStorage! Gravando o primeiro usuário...')
-      //se nao existir nada no localStorage, começa com o primeiro cadastro
-      newUsersList = [newUser]
+    return {
+      id,
+      name: form.get("name") as string,
+      age: form.get("age") as string,
+      occupation: form.get("occupation") as string
     }
+  }
 
-    console.log(newUsersList)  
 
-    //salvando os dados novos e antigos no localStorage
-    localStorage.setItem('newUser', JSON.stringify(newUsersList))
+  //pegando os usuarios do localStorage
+  function getUsersFromLocalStorage(){
+    const users = localStorage.getItem('newUser');
 
-    //atualizando o state
-    setUsers(newUsersList)
+    if(!users) return [];
 
-    //limpa os campos do formulário depois de gravar os dados
+    const parsedUsers = JSON.parse(users)
+
+    return Array.isArray(parsedUsers) ? parsedUsers : [parsedUsers];
+  }
+
+
+  //atualizando users ao clicar no botao edit
+  function updateUser(users: any[], newUser: any){
+    return users.map((user)=> {
+      if(user.id === newUser.id){
+        return newUser;
+      }
+      return user;
+    })
+  }
+
+
+  //criando novo usuario
+  function createUser(users: any[], newUser: any){
+    return [newUser, ...users]
+  }
+
+  //salvando so dados no localStorage
+  function saveUsers(users: any[]){
+
+    localStorage.setItem('newUser', JSON.stringify(users));
+    
+    setUsers(users)
+  }
+
+  
+  //limpando os dados do formulario
+  function clearForm(){
     setName("");
     setAge("");
     setOccupation("");
