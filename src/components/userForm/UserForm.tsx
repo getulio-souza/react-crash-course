@@ -8,6 +8,7 @@ type Props = {
 };
 
 export function UserForm({ setUsers, editUser }: Props) {
+
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [occupation, setOccupation] = useState("");
@@ -15,9 +16,12 @@ export function UserForm({ setUsers, editUser }: Props) {
   //para mostrar o usuario editado no formulario
   useEffect(() => {
     if (editUser) {
+      console.log('edit user existe:', editUser)
       setName(editUser.name || "");
       setAge(editUser.age || "");
       setOccupation(editUser.occupation || "");
+    } else{
+      console.log('edit user NAO existe:', editUser)
     }
   }, [editUser]);
 
@@ -34,7 +38,7 @@ export function UserForm({ setUsers, editUser }: Props) {
   },[])
 
   //se o array de dependencias estiver vazio, ele vai rodar apenas uma vez
-  //nesse caso queremos que ele rode sempre que editUser mudar (o usuario selecionar um usuario diferente na tabela)
+  //nesse caso queremos que ele rode sempre que editUser mudar (o usuario selecionar um usuario diferente na)
 
   function SubmitForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -80,13 +84,27 @@ export function UserForm({ setUsers, editUser }: Props) {
       newUsersList = [newUser]
     }
 
-    console.log(newUsersList)  
+    console.log('lista no subscribe:', newUsersList);
 
-    //salvando os dados novos e antigos no localStorage
-    localStorage.setItem('newUser', JSON.stringify(newUsersList))
+    //verificando se edit user existe. Se sim, edita o usuario. Se nao, apenas cria um novos
+    if(editUser){
+      console.log('esta em modo de edição')
+      
+    //percorrendo a lista do localStorage
+    for(let i = 0; i < newUsersList.length; i++){
+      const checkUser = newUsersList[i];
 
-    //atualizando o state
-    setUsers(newUsersList)
+      if(checkUser.id === editUser.id){
+        //substitui o usuario existente pelo atual 
+      }
+    }
+
+      
+    } else{
+      localStorage.setItem('newUser', JSON.stringify(newUsersList))
+      setUsers(newUsersList)
+    }
+
 
     //limpa os campos do formulário depois de gravar os dados
     setName("");

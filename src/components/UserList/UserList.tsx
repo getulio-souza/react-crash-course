@@ -16,10 +16,10 @@ export function UserList({users, setEditUser}: Props){
     function onEditUser(selectedUser: any){
         ///quando eu clicar em editar, eu preciso enviar os dados do usuario selecionado para o formulario
         console.log('usuario selecionado:',selectedUser)
+        console.log('tipo do usuario selecionado:', typeof selectedUser)
 
         setEditUser(selectedUser)
     }
-
 
     return (
       <>
