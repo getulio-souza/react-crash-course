@@ -20,7 +20,8 @@ export function UserForm({ setUsers, editUser }: Props) {
     }
 
     //resgatando os dados que já existem no localStorage
-    const storedUsers = JSON.parse(localStorage.getItem('newUser') || '')
+    // const storedUsers = JSON.parse(localStorage.getItem('newUser') || '')
+    const storedUsers =localStorage.getItem('newUser');
     
     if(!storedUsers) return;
 
@@ -79,6 +80,7 @@ export function UserForm({ setUsers, editUser }: Props) {
     console.log(newUsersList)  
 
     //salvando os dados novos e antigos no localStorage
+    localStorage.setItem('newUsersList', JSON.stringify(newUsersList))
     
 
     //atualizando o state
