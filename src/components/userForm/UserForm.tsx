@@ -33,26 +33,29 @@ export function UserForm({ setUsers, editUser }: Props) {
       setUsers(storedUsers);
     }
   }, []);
-
   //se o array de dependencias estiver vazio, ele vai rodar apenas uma vez
   //nesse caso queremos que ele rode sempre que editUser mudar (o usuario selecionar um usuario diferente na tabela)
 
-    event.preventDefault();
+  
+    function SubmitForm(event: React.FormEvent<HTMLFormElement> ){
 
-    const form: FormData = new FormData(event.currentTarget);
-
-    const newUser = getFormData(form);
-
-    const previousUsers = getUsersFromLocalStorage();
-
-    const updatedUsers = editUser ? updateUser(previousUsers, newUser) : createUser(previousUsers, newUser)
-    
-    localStorage.setItem('newUser', JSON.stringify(updatedUsers))
-
-    saveUsers(updatedUsers)
-
-    clearForm();
-  }
+      event.preventDefault();
+  
+      const form: FormData = new FormData(event.currentTarget);
+  
+      const newUser = getFormData(form);
+  
+      const previousUsers = getUsersFromLocalStorage();
+  
+      const updatedUsers = editUser ? updateUser(previousUsers, newUser) : createUser(previousUsers, newUser)
+      
+      localStorage.setItem('newUser', JSON.stringify(updatedUsers))
+  
+      saveUsers(updatedUsers)
+  
+      clearForm();
+    }
+  
 
 
   //pegando dados do formulario
