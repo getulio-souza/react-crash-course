@@ -16,7 +16,6 @@ export function UserForm({ setUsers, editUser }: Props) {
   //para mostrar o usuario editado no formulario
   useEffect(() => {
     if (editUser) {
-      console.log("edit user existe:", editUser);
       setName(editUser.name || "");
       setAge(editUser.age || "");
       setOccupation(editUser.occupation || "");
@@ -64,9 +63,9 @@ export function UserForm({ setUsers, editUser }: Props) {
 
     return {
       id,
-      name: form.get("name") as string,
-      age: form.get("age") as string,
-      occupation: form.get("occupation") as string
+      name: form.get("name")?.toString() || "",
+      age: form.get("age")?.toString() || "",
+      occupation: form.get("occupation")?.toString() || ""
     }
   }
 
@@ -77,14 +76,20 @@ export function UserForm({ setUsers, editUser }: Props) {
 
     if(!users) return [];
 
-    const parsedUsers = JSON.parse(users)
+    let parsedUsers;
 
-    return Array.isArray(parsedUsers) ? parsedUsers : [parsedUsers];
+    try {
+      parsedUsers = JSON.parse(users)
+    } catch {
+      return [];
+    }
+
+    return Array.isArray(parsedUsers) ? parsedUsers : [parsedUsers]; //aqui o dado retornado sempre vem em forma de array
   }
 
 
   //atualizando users ao clicar no botao edit
-  function updateUser(users: any[], newUser: any){
+  function updateUser(users: User[], newUser: User){
     return users.map((user)=> {
       if(user.id === newUser.id){
         return newUser;
@@ -95,15 +100,13 @@ export function UserForm({ setUsers, editUser }: Props) {
 
 
   //criando novo usuario
-  function createUser(users: any[], newUser: any){
+  function createUser(users: User[], newUser: User){
     return [newUser, ...users]
   }
 
   //salvando so dados no localStorage
-  function saveUsers(users: any[]){
-
+  function saveUsers(users: User[]){
     localStorage.setItem('newUser', JSON.stringify(users));
-    
     setUsers(users)
   }
 
