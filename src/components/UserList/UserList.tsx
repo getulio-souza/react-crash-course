@@ -3,22 +3,22 @@ import './userList.css'
 type Props = {
     users: any[];
     setEditUser: React.Dispatch<React.SetStateAction<any>>;
+    setRemoveUser: React.Dispatch<React.SetStateAction<any>>;
 }
 
+export function UserList({users, setEditUser, setRemoveUser}: Props){    
 
-export function UserList({users, setEditUser}: Props){    
-    // console.log('users no user list:', users)
-
-    function onDeleteUser(){
-        console.log('usuario deletado!')
+    function onDeleteUser(selectedUser: any){
+        console.log('usuario selecionado para deletar:', selectedUser)
+        setRemoveUser(selectedUser)
     }
 
     function onEditUser(selectedUser: any){
         ///quando eu clicar em editar, eu preciso enviar os dados do usuario selecionado para o formulario
-        console.log('usuario selecionado:',selectedUser)
-        console.log('tipo do usuario selecionado:', typeof selectedUser)
+        console.log('usuario selecionado:',selectedUser);
+        console.log('tipo do usuario selecionado:', typeof selectedUser);
 
-        setEditUser(selectedUser)
+        setEditUser(selectedUser);
     }
 
     return (
@@ -35,7 +35,7 @@ export function UserList({users, setEditUser}: Props){
             </tr>
           </thead>
           <tbody>
-            {users.length === 0 && (
+            {users?.length === 0 && (
               <tr style={{ color: "red", fontWeight: "bold", padding: "10px" }}>
                 <td>sem usuarios para exibir</td>
               </tr>
@@ -53,7 +53,7 @@ export function UserList({users, setEditUser}: Props){
                   >
                     Editar
                   </button>
-                  <button onClick={onDeleteUser}>Deletar</button>
+                  <button onClick={()=> onDeleteUser(user)}>Deletar</button>
                 </td>
               </tr>
             ))}
