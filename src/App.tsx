@@ -16,17 +16,18 @@ function App() {
     }, [])
 
     //logica para remover um usuario selecionado
-    function removeSelectedUser(){
+    function removeSelectedUser(user: User){
+      
       //original list
-      console.log(users)
+      console.log('lista de usuarios:', users)
   
       //usuario selecionado para remover
-      console.log(removeUser)
-      const selectedUserToRemove = removeUser;
+      console.log('usuario para remover:',user)
+      const selectedUserToRemove = user;
   
       //criar uma nova lista sem o usuario selecionado para remover (nao pode alterar a lista original)
       const updatedList: any[] = users.filter((item) => item.id !== selectedUserToRemove?.id);
-      console.log(updatedList);
+      console.log('lista atualizada apos remoção:', updatedList);
   
       //atualizando a lista com o usuario removido
       setUsers(updatedList)
