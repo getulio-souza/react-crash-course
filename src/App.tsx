@@ -1,51 +1,67 @@
-import { useEffect, useState } from 'react';
-import './App.css'
-import { UserForm } from './components/userForm/UserForm';
-import { UserList } from './components/UserList/UserList';
-import type {User} from './types/User'
+import { useEffect, useState } from "react";
+import "./App.css";
+import { UserForm } from "./components/userForm/UserForm";
+import { UserList } from "./components/UserList/UserList";
+import type { User } from "./types/User";
 
 function App() {
-   const [users, setUsers] = useState<User[]>([]);
-    const [editUser, setEditUser] = useState<User | null>(null)
-    const [removeUser, setRemoveUser] = useState<User | null>(null)
-    
-    //carregando os dados do localStorage na lista de usuarios
-    useEffect(()=> {
-      const parsedUsers = JSON.parse(localStorage.getItem('newUser') || '[]')
-      setUsers(parsedUsers)
-    }, [])
+  const [users, setUsers] = useState<User[]>([]);
+  const [editUser, setEditUser] = useState<User | null>(null);
+  const [removeUser, setRemoveUser] = useState<User | null>(null);
 
-    //logica para remover um usuario selecionado
-    function removeSelectedUser(user: User){
-      
-      //original list
-      console.log('lista de usuarios:', users)
-  
-      //usuario selecionado para remover
-      console.log('usuario para remover:',user)
-      const selectedUserToRemove = user;
-  
-      //criar uma nova lista sem o usuario selecionado para remover (nao pode alterar a lista original)
-      const updatedList: any[] = users.filter((item) => item.id !== selectedUserToRemove?.id);
-      console.log('lista atualizada apos remoção:', updatedList);
-  
-      //atualizando a lista com o usuario removido
-      setUsers(updatedList)
-  
-      //atualizando o localStorage
-      localStorage.removeItem('selectedUserToRemove')
+  //carregando os dados do localStorage na lista de usuarios
+  useEffect(() => {
+    const parsedUsers = JSON.parse(localStorage.getItem("newUser") || "[]");
+    setUsers(parsedUsers);
+  }, []);
+
+  //logica para remover um usuario selecionado
+  function removeSelectedUser(user: User) {
+    //original list
+    console.log("lista de usuarios:", users);
+
+    //usuario selecionado para remover
+    console.log("usuario para remover:", user);
+    const selectedUserToRemove = user;
+
+    //criar uma nova lista sem o usuario selecionado para remover (nao pode alterar a lista original)
+    const updatedList: any[] = users.filter(
+      (item) => item.id !== selectedUserToRemove?.id,
+    );
+    console.log("lista atualizada apos remoção:", updatedList);
+
+    //atualizando a lista com o usuario removido
+    setUsers(updatedList);
+
+    //percorrendo o localStorage
+    const usersFromLocal = JSON.parse(localStorage.getItem("newUser") || "[]");
+
+    for(let i = 0; i < usersFromLocal.length; i++){
+      console.log(usersFromLocal[i])
+
+      const userLocal = usersFromLocal[i];
+
+      if(userLocal.id === selectedUserToRemove.id){
+        console.log('usuarios batem!')
+
+        const newUsersList = [...usersFromLocal]
+        break
+      }
     }
+  }
 
   return (
     <>
-
-     <section>
-      <UserForm setUsers={setUsers} editUser={editUser}/>
-      <UserList users={users} setEditUser={setEditUser} setRemoveUser={removeSelectedUser}/>
-     </section>
-
+      <section>
+        <UserForm setUsers={setUsers} editUser={editUser} />
+        <UserList
+          users={users}
+          setEditUser={setEditUser}
+          setRemoveUser={removeSelectedUser}
+        />
+      </section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
