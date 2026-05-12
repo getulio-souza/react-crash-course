@@ -1,0 +1,15 @@
+.filter-container{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-input-and-btn{
+    display: flex;
+    gap:0.5rem;
+}
+
+.filter-input-and-btn button{
+    width: 100px;
+    cursor: pointer;
+}

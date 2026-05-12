@@ -8,6 +8,7 @@ function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [editUser, setEditUser] = useState<User | null>(null);
   const [removeUser, setRemoveUser] = useState<User | null>(null);
+  
 
   //carregando os dados do localStorage na lista de usuarios
   useEffect(() => {
