@@ -2,17 +2,17 @@ import type { ChangeEvent } from "react";
 import "./UserFilter.css"
 
 type Props = {
-    setFilterUsers: React.Dispatch<React.SetStateAction<string>>
+    setSearchUser: React.Dispatch<React.SetStateAction<string>>
 }
 
-function UserFilter({setFilterUsers}: Props){
+function UserFilter({setSearchUser}: Props){
 
     function onFilterUsers(event:ChangeEvent<HTMLInputElement>){
         console.log('filtrando usuarios:', event.target.value)
 
         const inputValue = event.target.value;
 
-        setFilterUsers(inputValue);
+        setSearchUser(inputValue);
     }
 
 

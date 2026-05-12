@@ -11,7 +11,7 @@ type Props = {
 
 export function UserList({users, setEditUser, setRemoveUser}: Props){    
 
-    const [filterList, setfilterList] = useState<User[]>(users);
+    const [searchUser, setSearchUser] = useState<User[]>(users);
 
     function onDeleteUser(selectedUser: User){
         console.log('usuario selecionado para deletar:', selectedUser)
@@ -26,7 +26,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
         setEditUser(selectedUser);
     }
 
-    function onFilterUsers(userInput: string){
+    function onSearchUsers(userInput: string){
       console.log('filtrando usuarios no componente de tabela:', userInput)
       console.log('array de users:', users)
       
@@ -35,18 +35,18 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
       console.log('novo usuario filtrado:', newUserList)
 
       //com o usuario filtrado retornado, atualizar a tabela 
-      setfilterList(newUserList)
+      setSearchUser(newUserList)
     }
 
     useEffect(()=> {
-      setfilterList(users)
+      setSearchUser(users)
     }, [users])
 
     return (
       <>
         <h2>lista de usuarios</h2>
 
-        <UserFilter setFilterUsers={onFilterUsers}/>
+        <UserFilter setSearchUser={onSearchUsers}/>
 
         <table>
           <thead>
@@ -64,7 +64,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
                 <td>sem usuarios para exibir</td>
               </tr>
             )}
-            {filterList.map((user: User, index: any) => (
+            {searchUser.map((user: User, index: any) => (
               <tr key={index}>
                 <td data-label="id: ">{user?.id}</td>
                 <td data-label="nome: ">{user?.name}</td>
