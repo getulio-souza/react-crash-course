@@ -36,7 +36,7 @@ function App() {
     const usersFromLocal = JSON.parse(localStorage.getItem("newUser") || "[]");
     console.log('usurios do localStorage:',usersFromLocal)
 
-    const updatedListOnLocalStorage = usersFromLocal.filter((user: any)=> user.id !== selectedUserToRemove.id)
+    const updatedListOnLocalStorage = usersFromLocal.filter((user: User)=> user.id !== selectedUserToRemove.id)
     console.log('updatedListOnLocalStorage:', updatedListOnLocalStorage)
 
     localStorage.setItem('newUser', JSON.stringify(updatedListOnLocalStorage))

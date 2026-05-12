@@ -31,7 +31,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
       console.log('array de users:', users)
       
       //logica para mostrar os items filtrados na tabela
-      const newUserList = users.filter((user)=> user.name.startsWith(userInput))
+      const newUserList = users.filter((user)=> user.name.toLowerCase().startsWith(userInput.toLowerCase()))
       console.log('novo usuario filtrado:', newUserList)
 
       //com o usuario filtrado retornado, atualizar a tabela 
