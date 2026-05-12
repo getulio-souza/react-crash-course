@@ -1,3 +1,4 @@
+import type { User } from '../../types/User';
 import './userList.css'
 
 type Props = {
@@ -40,12 +41,12 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
                 <td>sem usuarios para exibir</td>
               </tr>
             )}
-            {users.map((user: User, index: User) => (
+            {users.map((user: User, index: any) => (
               <tr key={index}>
-                <td>{user?.id}</td>
-                <td>{user?.name}</td>
-                <td>{user?.age}</td>
-                <td>{user?.occupation}</td>
+                <td data-label="id: ">{user?.id}</td>
+                <td data-label="nome: ">{user?.name}</td>
+                <td data-label="idade: ">{user?.age}</td>
+                <td data-label="ocupação: ">{user?.occupation}</td>
                 <td>
                   <button
                     style={{ marginBottom: "10px" }}

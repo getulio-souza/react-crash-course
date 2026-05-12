@@ -53,3 +53,42 @@ button {
 button:hover {
   background-color: #1d4ed8;
 }
+
+/* responsivo tabela */
+
+@media screen and (max-width:900px){
+  @media (max-width: 900px) {
+  table {
+    width: 100%;
+    border: 1px solid #2a2a2a;
+
+    thead,
+    tr {
+      display: block;
+    }
+    thead {
+      display: none;
+    }
+
+    tr {
+      display: block;
+      height: auto;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    td {
+      display: block;
+      font-size: 1em;
+      position: relative;
+      color: #fff;
+    }
+
+    td::before {
+      content: attr(data-label);
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+}
+}
