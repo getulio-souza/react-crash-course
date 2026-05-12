@@ -21,12 +21,13 @@ thead {
 
 th {
   padding: 12px;
-  text-align: left;
+  text-align: center;
 }
 
 /* Células */
 td {
   padding: 12px;
+  text-align: center;
 }
 
 /* Linhas alternadas */
