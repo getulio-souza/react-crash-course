@@ -25,7 +25,7 @@ function App() {
     const selectedUserToRemove = user;
 
     //criar uma nova lista sem o usuario selecionado para remover (nao pode alterar a lista original)
-    const updatedList: any[] = users.filter(
+    const updatedList: User[] = users.filter(
       (item) => item.id !== selectedUserToRemove?.id,
     );
     console.log("lista atualizada apos remoção:", updatedList);
@@ -35,18 +35,22 @@ function App() {
 
     //percorrendo o localStorage
     const usersFromLocal = JSON.parse(localStorage.getItem("newUser") || "[]");
+    console.log(usersFromLocal)
 
     for(let i = 0; i < usersFromLocal.length; i++){
       console.log(usersFromLocal[i])
 
-      const userLocal = usersFromLocal[i];
+      const userIndex = usersFromLocal[i];
 
-      if(userLocal.id === selectedUserToRemove.id){
+      if(userIndex.id === selectedUserToRemove.id){
         console.log('usuarios batem!')
 
-        const newUsersList = [...usersFromLocal]
+        //removendo o usuario da lista do localStorage
+        
+
+
         break
-      }
+      } 
     }
   }
 

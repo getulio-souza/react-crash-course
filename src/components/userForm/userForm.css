@@ -3,7 +3,7 @@ form {
   max-width: 400px;
   margin: 30px auto;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: black;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -14,7 +14,7 @@ form {
 h1 {
   text-align: center;
   margin-bottom: 20px;
-  color: #1f2937;
+  color: #fff;
 }
 
 /* Cada campo */
@@ -28,23 +28,29 @@ form div {
 label {
   margin-bottom: 5px;
   font-size: 14px;
-  color: #374151;
+  color: #fff;
 }
 
 /* Input */
 input {
+  color: white;
   padding: 10px;
   border: 1px solid #d1d5db;
   border-radius: 6px;
   outline: none;
   font-size: 14px;
   transition: 0.2s;
+  background-color: black;
 }
 
 /* Focus no input */
 input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+input::placeholder{
+  color: white;
 }
 
 /* Botão */
@@ -64,3 +70,4 @@ button {
 button:hover {
   background-color: #1d4ed8;
 }
+

@@ -31,12 +31,12 @@ td {
 
 /* Linhas alternadas */
 tbody tr:nth-child(even) {
-  background-color: #f9fafb;
+  background-color: rgb(35, 35, 35);
 }
 
 /* Hover */
 tbody tr:hover {
-  background-color: #e5e7eb;
+  background-color: #2a2a2a;
   transition: 0.2s;
 }
 

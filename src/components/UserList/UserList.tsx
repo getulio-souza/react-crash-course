@@ -1,19 +1,19 @@
 import './userList.css'
 
 type Props = {
-    users: any[];
-    setEditUser: React.Dispatch<React.SetStateAction<any>>;
-    setRemoveUser: React.Dispatch<React.SetStateAction<any>>;
+    users: User[];
+    setEditUser: React.Dispatch<React.SetStateAction<User>>;
+    setRemoveUser: React.Dispatch<React.SetStateAction<User>>;
 }
 
 export function UserList({users, setEditUser, setRemoveUser}: Props){    
 
-    function onDeleteUser(selectedUser: any){
+    function onDeleteUser(selectedUser: User){
         console.log('usuario selecionado para deletar:', selectedUser)
         setRemoveUser(selectedUser)
     }
 
-    function onEditUser(selectedUser: any){
+    function onEditUser(selectedUser: User){
         ///quando eu clicar em editar, eu preciso enviar os dados do usuario selecionado para o formulario
         console.log('usuario selecionado:',selectedUser);
         console.log('tipo do usuario selecionado:', typeof selectedUser);
@@ -40,7 +40,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
                 <td>sem usuarios para exibir</td>
               </tr>
             )}
-            {users.map((user: any, index: any) => (
+            {users.map((user: User, index: User) => (
               <tr key={index}>
                 <td>{user?.id}</td>
                 <td>{user?.name}</td>
