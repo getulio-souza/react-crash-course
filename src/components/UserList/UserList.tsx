@@ -47,6 +47,8 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   function onSortUsers(selectedOption: string) {
     console.log("opcao selecionada:", selectedOption)
 
+    console.log('users apos selecionar uma opcao no select:', users)
+
     //se for idade crescente
     if(selectedOption === 'idadeCrescente'){
       const sortHigherAge = users.sort((a, b)=> Number(a.age) - Number(b.age))
@@ -82,6 +84,17 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     }
   }
 
+  function onCleanFilters(){
+    console.log('chamou o limpar filtros!')
+
+    //essa funcao tem que retornar a lista original 
+    users;
+    //limpar tambem a opção selecionada no select
+    setSortUsers('');
+    setSearchUser([])
+
+  }
+
 
     useEffect(()=> {
       setSearchUser(users)
@@ -95,7 +108,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
         <div className="filters-container">
         <UserFilter setSearchUser={onSearchUsers} />
         <OrderList setSortUsers={onSortUsers} />
-        <button>clear Filters</button>
+        <button onClick={onCleanFilters}>clear Filters</button>
         </div>
         
         <table>
