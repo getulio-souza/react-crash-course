@@ -97,4 +97,8 @@ button:hover {
 .filters-container{
   display: flex;
   gap: 1rem;
+
+  button{
+    width: 150px;
+  }
 }

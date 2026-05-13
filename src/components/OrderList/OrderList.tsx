@@ -3,7 +3,7 @@ import "./OrderList.css"
 import type { ChangeEvent } from "react"
 
 type Props = {
-  setSortUsers: React.Dispatch<React.SetStateAction<User[]>>
+  setSortUsers: React.Dispatch<React.SetStateAction<string>>
 }
 
 function OrderList({ setSortUsers }: Props) {
@@ -19,7 +19,7 @@ function OrderList({ setSortUsers }: Props) {
   return (
     <>
       <select onChange={onSelectOption} name="" id="">
-        <option value="">Selecione um filtro</option>
+        <option value="">Filtrar por:</option>
         <option value="a-z">Nome A-Z</option>
         <option value="z-a">Nome Z-A</option>
         <option value="idadeCrescente">Idade crescente</option>

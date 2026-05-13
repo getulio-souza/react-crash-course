@@ -14,7 +14,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   //filtros
   const [searchUser, setSearchUser] = useState<User[]>(users);
-  const [sortUsers, setSortUsers] = useState<User[]>();
+  const [sortUsers, setSortUsers] = useState('');
 
     function onDeleteUser(selectedUser: User){
         console.log('usuario selecionado para deletar:', selectedUser)
@@ -44,8 +44,42 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   
 
   //metodo para filtar o select de opcoes
-  function onSortUsers(selectedOption: any) {
-    console.log("opcao sele")
+  function onSortUsers(selectedOption: string) {
+    console.log("opcao selecionada:", selectedOption)
+
+    //se for idade crescente
+    if(selectedOption === 'idadeCrescente'){
+      const sortHigherAge = users.sort((a, b)=> Number(a.age) - Number(b.age))
+      console.log(sortHigherAge)
+      setSortUsers(selectedOption)
+    }
+
+    //se for idade decrescente 
+    if(selectedOption === 'idadeDecrescente'){
+      const sortLowerAge = users.sort((a, b)=> Number(b.age) - Number(a.age))
+      console.log(sortLowerAge)
+      setSortUsers(selectedOption)
+    }
+
+    //se for a-Z
+    if(selectedOption === 'a-z'){
+      const sortAz = users.sort((a,b)=> {
+        if(a.name > b.name) return 1
+        return -1
+      })
+      console.log(sortAz)
+      setSortUsers(selectedOption)
+    }
+
+    //se for z-A
+    if(selectedOption === 'z-a'){
+      const sortZA = users.sort((a,b)=> {
+        if(a.name > b.name) return -1
+        return 1
+      }) 
+      console.log(sortZA)
+      setSortUsers(selectedOption)
+    }
   }
 
 
@@ -60,7 +94,8 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
         {/* filtros */}
         <div className="filters-container">
         <UserFilter setSearchUser={onSearchUsers} />
-          <OrderList setSortUsers={onSortUsers} />
+        <OrderList setSortUsers={onSortUsers} />
+        <button>clear Filters</button>
         </div>
         
         <table>
@@ -85,14 +120,15 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
                 <td data-label="nome: ">{user?.name}</td>
                 <td data-label="idade: ">{user?.age}</td>
                 <td data-label="ocupação: ">{user?.occupation}</td>
-                <td>
+                <td className="actions-list">
                   <button
+                    className="edit-btn"
                     style={{ marginBottom: "10px" }}
                     onClick={() => onEditUser(user)}
                   >
                     Editar
                   </button>
-                  <button onClick={()=> onDeleteUser(user)}>Deletar</button>
+                  <button className="delete-btn" onClick={()=> onDeleteUser(user)}>Deletar</button>
                 </td>
               </tr>
             ))}
