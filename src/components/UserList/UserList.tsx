@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { User } from '../../types/User';
 import UserFilter from '../usersFilter/UserFilter';
 import './userList.css'
+import OrderList from '../OrderList/OrderList';
 
 type Props = {
     users: User[];
@@ -11,7 +12,9 @@ type Props = {
 
 export function UserList({users, setEditUser, setRemoveUser}: Props){    
 
-    const [searchUser, setSearchUser] = useState<User[]>(users);
+  //filtros
+  const [searchUser, setSearchUser] = useState<User[]>(users);
+  const [sortUsers, setSortUsers] = useState<User[]>();
 
     function onDeleteUser(selectedUser: User){
         console.log('usuario selecionado para deletar:', selectedUser)
@@ -26,6 +29,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
         setEditUser(selectedUser);
     }
 
+  //metodo para filtrar o input de texto
     function onSearchUsers(userInput: string){
       console.log('filtrando usuarios no componente de tabela:', userInput)
       console.log('array de users:', users)
@@ -36,7 +40,14 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
       //com o usuario filtrado retornado, atualizar a tabela 
       setSearchUser(newUserList)
-    }
+  }
+  
+
+  //metodo para filtar o select de opcoes
+  function onSortUsers(selectedOption: any) {
+    console.log("opcao sele")
+  }
+
 
     useEffect(()=> {
       setSearchUser(users)
@@ -46,8 +57,12 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
       <>
         <h2>lista de usuarios</h2>
 
-        <UserFilter setSearchUser={onSearchUsers}/>
-
+        {/* filtros */}
+        <div className="filters-container">
+        <UserFilter setSearchUser={onSearchUsers} />
+          <OrderList setSortUsers={onSortUsers} />
+        </div>
+        
         <table>
           <thead>
             <tr>
