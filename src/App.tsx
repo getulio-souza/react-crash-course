@@ -3,6 +3,7 @@ import "./App.css";
 import { UserForm } from "./components/userForm/UserForm";
 import { UserList } from "./components/UserList/UserList";
 import type { User } from "./types/User";
+import Header from "./components/header/Header";
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -44,6 +45,7 @@ function App() {
 
   return (
     <>
+    <Header/>
       <section>
         <UserForm setUsers={setUsers} editUser={editUser} />
         <UserList
