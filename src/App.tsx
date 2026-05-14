@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { UserForm } from "./components/userForm/UserForm";
-import { UserList } from "./components/UserList/UserList";
+import { UserForm } from "./pages/userForm/UserForm";
+import { UserList } from "./pages/UserList/UserList";
 import type { User } from "./types/User";
 import Header from "./components/header/Header";
 
@@ -43,16 +43,18 @@ function App() {
     localStorage.setItem('newUser', JSON.stringify(updatedListOnLocalStorage))
   }
 
+  
+
   return (
     <>
     <Header/>
       <section>
-        <UserForm setUsers={setUsers} editUser={editUser} />
-        <UserList
+        {/* <UserForm setUsers={setUsers} editUser={editUser} /> */}
+        {/* <UserList
           users={users}
           setEditUser={setEditUser}
           setRemoveUser={removeSelectedUser}
-        />
+        /> */}
       </section>
     </>
   );

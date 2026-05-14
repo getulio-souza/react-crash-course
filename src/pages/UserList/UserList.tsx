@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { User } from '../../types/User';
-import UserFilter from '../usersFilter/UserFilter';
+import UserFilter from '../../components/usersFilter/UserFilter';
 import './userList.css'
-import OrderList from '../OrderList/OrderList';
+import OrderList from '../../components/OrderList/OrderList';
 
 type Props = {
     users: User[];
