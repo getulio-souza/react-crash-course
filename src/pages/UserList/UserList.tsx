@@ -21,6 +21,11 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     function onDeleteUser(selectedUser: User){
         console.log('usuario selecionado para deletar:', selectedUser)
         setRemoveUser(selectedUser)
+
+        //abrindo modal de confirmação de deleção de usuário
+        
+
+
     }
 
     function onEditUser(selectedUser: User){

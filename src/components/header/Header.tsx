@@ -2,8 +2,8 @@ import "./Header.css";
 import tableIcon from "../../assets/table-icon.png"
 import formIcon from "../../assets/form-icon.png"
 import { Link } from "react-router-dom";
-
-
+import GridViewIcon from "@mui/icons-material/GridView"
+import DescriptionIcon from "@mui/icons-material/Description"
 function Header(){
 
     function navigateToUsersTable(){}
@@ -16,14 +16,14 @@ function Header(){
             
             <Link style={{textDecoration: 'none', color: '#fff'}} to={{pathname: "/"}}>
             <div className="users-category" onClick={navigateToUsersTable}>
-                <img src={tableIcon} alt="" width={"30px"} />
+                <GridViewIcon/>
                 <span>USERS TABLE</span>
             </div>
             </Link>
 
             <Link style={{textDecoration: 'none', color: '#fff'}} to={{pathname: "/userForm"}}>
             <div className="users-category" onClick={navigateToUsersForm}>
-                <img src={formIcon} alt="" width={"30px"} />
+                <DescriptionIcon/>
                 <span>USERS FORM</span>
             </div>
             </Link>
