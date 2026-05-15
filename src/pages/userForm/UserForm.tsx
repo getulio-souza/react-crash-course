@@ -164,7 +164,7 @@ export function UserForm({ setUsers, editUser }: Props) {
           />
         </div>
 
-        <button type="submit">salvar dados</button>
+        <button className="submit-btn" type="submit">salvar dados</button>
       </form>
     </>
   );

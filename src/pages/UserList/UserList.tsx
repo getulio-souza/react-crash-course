@@ -102,6 +102,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
     return (
       <>
+      <section className='list-container'>
         <h2>lista de usuarios</h2>
 
         {/* filtros */}
@@ -136,7 +137,6 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
                 <td className="actions-list">
                   <button
                     className="edit-btn"
-                    style={{ marginBottom: "10px" }}
                     onClick={() => onEditUser(user)}
                   >
                     Editar
@@ -147,6 +147,8 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
             ))}
           </tbody>
         </table>
+
+      </section>
       </>
     );
 }

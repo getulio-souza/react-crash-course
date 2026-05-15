@@ -1,3 +1,8 @@
+.list-container{
+  width: 1500px;
+  margin: 0 auto;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -42,18 +47,18 @@ tbody tr:hover {
 }
 
 /* Botão */
-button {
+.actions-list button {
+  width: 100%;
   padding: 6px 12px;
+  height: 40px;
   border: none;
-  background-color: #2563eb;
   color: white;
   border-radius: 6px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #1d4ed8;
-}
+
+
 
 /* responsivo tabela */
 
@@ -97,8 +102,29 @@ button:hover {
 .filters-container{
   display: flex;
   gap: 1rem;
+}
 
-  button{
+.filters-container button{
     width: 150px;
   }
+
+.actions-list{
+  display: flex;
+  gap: 1rem;
+}
+
+.edit-btn{
+   background-color: #2563eb;
+}
+
+.delete-btn{
+  background-color: rgb(203, 42, 42);
+}
+
+.delete-btn:hover{
+  opacity: 0.8;
+}
+
+.edit-btn:hover{
+  opacity: 0.8;
 }
