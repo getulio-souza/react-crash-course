@@ -12,10 +12,10 @@ function App() {
   
 
   //carregando os dados do localStorage na lista de usuarios
-  useEffect(() => {
-    const parsedUsers = JSON.parse(localStorage.getItem("newUser") || "[]");
-    setUsers(parsedUsers);
-  }, []);
+  // useEffect(() => {
+  //   const parsedUsers = JSON.parse(localStorage.getItem("newUser") || "[]");
+  //   setUsers(parsedUsers);
+  // }, []);
 
   return (
     <>

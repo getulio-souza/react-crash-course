@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./userForm.css";
 import type { User } from "../../types/User";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
@@ -8,6 +9,8 @@ type Props = {
 };
 
 export function UserForm({ setUsers, editUser }: Props) {
+
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
@@ -51,6 +54,9 @@ export function UserForm({ setUsers, editUser }: Props) {
       localStorage.setItem('newUser', JSON.stringify(updatedUsers))
   
       saveUsers(updatedUsers)
+
+      //navegando para a tela de listagem de usuarios
+      navigate("/");
   
       clearForm();
     }
@@ -102,6 +108,10 @@ export function UserForm({ setUsers, editUser }: Props) {
   //criando novo usuario
   function createUser(users: User[], newUser: User){
     return [newUser, ...users]
+
+    //navegando para a tela de listagem de usuarios
+    
+
   }
 
   //salvando so dados no localStorage
