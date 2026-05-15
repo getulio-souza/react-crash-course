@@ -27,16 +27,16 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   //metodo para abrir o modal de deleção
     function onOpenDeleteUserModal(selectedUser: User){
-        console.log('usuario selecionado para deletar no modal:', selectedUser)
+      console.log('usuario selecionado para deletar no modal:', selectedUser)
 
-        setSelectedUser(selectedUser)
+      setSelectedUser(selectedUser)
 
-        setShowDeleteModal(true)
+      setShowDeleteModal(true)
     }
 
     //funcao para deletar o usuario de vez (botão deletar no modal)
     function onConfirmDeleteUser(selectedUser: User){
-        setRemoveUser(selectedUser)
+       setRemoveUser(selectedUser)
     }
 
 
@@ -129,7 +129,10 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
         <section className="list-container">
           {/* modal de deleção */}
           {showDeleteModal && (
-            <DeleteUserModal setShowDeleteModal={setShowDeleteModal} setRemoveUser={onConfirmDeleteUser} />
+            <DeleteUserModal 
+              setShowDeleteModal={setShowDeleteModal} 
+              setSelectedUser={onConfirmDeleteUser}
+            />
           )}
 
           <h2>lista de usuarios</h2>

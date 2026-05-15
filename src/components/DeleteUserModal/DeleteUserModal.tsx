@@ -4,10 +4,9 @@ import type { User } from '../../types/User';
 
 type Props = {
     setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
-    setRemoveUser: React.Dispatch<React.SetStateAction<User>>
 }
 
-function DeleteUserModal({setShowDeleteModal, setRemoveUser}: Props){
+function DeleteUserModal({setShowDeleteModal}: Props){
 
     function onCancelDeleteUser(){
         console.log('chamou o cancelar no modal')
@@ -15,7 +14,8 @@ function DeleteUserModal({setShowDeleteModal, setRemoveUser}: Props){
     }
 
     function onDeleteUser(){
-        setRemoveUser()
+        // setSelectedUser()
+        
     }
 
 
