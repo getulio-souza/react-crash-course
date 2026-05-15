@@ -3,6 +3,7 @@ import type { User } from '../../types/User';
 import UserFilter from '../../components/usersFilter/UserFilter';
 import './userList.css'
 import OrderList from '../../components/OrderList/OrderList';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
     users: User[];
@@ -11,6 +12,7 @@ type Props = {
 }
 
 export function UserList({users, setEditUser, setRemoveUser}: Props){    
+  const navigate = useNavigate()
 
   //filtros
   const [searchUser, setSearchUser] = useState<User[]>(users);
@@ -22,11 +24,13 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     }
 
     function onEditUser(selectedUser: User){
-        ///quando eu clicar em editar, eu preciso enviar os dados do usuario selecionado para o formulario
-        console.log('usuario selecionado:',selectedUser);
-        console.log('tipo do usuario selecionado:', typeof selectedUser);
+      ///quando eu clicar em editar, eu preciso enviar os dados do usuario selecionado para o formulario
+      console.log('usuario selecionado:',selectedUser);
+      console.log('tipo do usuario selecionado:', typeof selectedUser);
 
-        setEditUser(selectedUser);
+      setEditUser(selectedUser);
+      navigate("/userForm")
+
     }
 
   //metodo para filtrar o input de texto
@@ -102,6 +106,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
     return (
       <>
+      <section className='list-container'>
         <h2>lista de usuarios</h2>
 
         {/* filtros */}
@@ -136,7 +141,6 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
                 <td className="actions-list">
                   <button
                     className="edit-btn"
-                    style={{ marginBottom: "10px" }}
                     onClick={() => onEditUser(user)}
                   >
                     Editar
@@ -147,6 +151,8 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
             ))}
           </tbody>
         </table>
+
+      </section>
       </>
     );
 }

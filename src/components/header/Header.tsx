@@ -17,14 +17,14 @@ function Header(){
             <Link style={{textDecoration: 'none', color: '#fff'}} to={{pathname: "/"}}>
             <div className="users-category" onClick={navigateToUsersTable}>
                 <img src={tableIcon} alt="" width={"30px"} />
-                <span>Users Table</span>
+                <span>USERS TABLE</span>
             </div>
             </Link>
 
             <Link style={{textDecoration: 'none', color: '#fff'}} to={{pathname: "/userForm"}}>
             <div className="users-category" onClick={navigateToUsersForm}>
                 <img src={formIcon} alt="" width={"30px"} />
-                <span>Users Form</span>
+                <span>USERS FORM</span>
             </div>
             </Link>
         </section>

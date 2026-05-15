@@ -21,3 +21,7 @@
 .users-category:hover{
     opacity: 0.8;
 }
+
+.users-category span{
+    font-weight: 500;
+}
