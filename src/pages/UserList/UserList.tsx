@@ -4,6 +4,7 @@ import UserFilter from '../../components/usersFilter/UserFilter';
 import './userList.css'
 import OrderList from '../../components/OrderList/OrderList';
 import { useNavigate } from 'react-router-dom';
+import DeleteUserModal from '../../components/DeleteUserModal/DeleteUserModal';
 
 type Props = {
     users: User[];
@@ -18,15 +19,26 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   const [searchUser, setSearchUser] = useState<User[]>(users);
   const [sortUsers, setSortUsers] = useState('');
 
-    function onDeleteUser(selectedUser: User){
-        console.log('usuario selecionado para deletar:', selectedUser)
-        setRemoveUser(selectedUser)
-
-        //abrindo modal de confirmação de deleção de usuário
-        
+  const [selectedUser, setSelectedUser] = useState<User>();
 
 
+  //state para o modal de deleção
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  //metodo para abrir o modal de deleção
+    function onOpenDeleteUserModal(selectedUser: User){
+        console.log('usuario selecionado para deletar no modal:', selectedUser)
+
+        setSelectedUser(selectedUser)
+
+        setShowDeleteModal(true)
     }
+
+    //funcao para deletar o usuario de vez (botão deletar no modal)
+    function onConfirmDeleteUser(selectedUser: User){
+        setRemoveUser(selectedUser)
+    }
+
 
     function onEditUser(selectedUser: User){
       ///quando eu clicar em editar, eu preciso enviar os dados do usuario selecionado para o formulario
@@ -109,55 +121,69 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
       setSearchUser(users)
     }, [users])
 
+    useEffect(()=> {
+    }, [])
+
     return (
       <>
-      <section className='list-container'>
-        <h2>lista de usuarios</h2>
+        <section className="list-container">
+          {/* modal de deleção */}
+          {showDeleteModal && (
+            <DeleteUserModal setShowDeleteModal={setShowDeleteModal} setRemoveUser={onConfirmDeleteUser} />
+          )}
 
-        {/* filtros */}
-        <div className="filters-container">
-        <UserFilter setSearchUser={onSearchUsers} />
-        <OrderList setSortUsers={onSortUsers} />
-        <button onClick={onCleanFilters}>clear Filters</button>
-        </div>
-        
-        <table>
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>Name</th>
-              <th>age</th>
-              <th>Ocupation</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users?.length === 0 && (
-              <tr style={{ color: "red", fontWeight: "bold", padding: "10px" }}>
-                <td>sem usuarios para exibir</td>
-              </tr>
-            )}
-            {searchUser.map((user: User, index: any) => (
-              <tr key={index}>
-                <td data-label="id: ">{user?.id}</td>
-                <td data-label="nome: ">{user?.name}</td>
-                <td data-label="idade: ">{user?.age}</td>
-                <td data-label="ocupação: ">{user?.occupation}</td>
-                <td className="actions-list">
-                  <button
-                    className="edit-btn"
-                    onClick={() => onEditUser(user)}
-                  >
-                    Editar
-                  </button>
-                  <button className="delete-btn" onClick={()=> onDeleteUser(user)}>Deletar</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          <h2>lista de usuarios</h2>
 
-      </section>
+          {/* filtros */}
+          <div className="filters-container">
+            <UserFilter setSearchUser={onSearchUsers} />
+            <OrderList setSortUsers={onSortUsers} />
+            <button onClick={onCleanFilters}>clear Filters</button>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>age</th>
+                <th>Ocupation</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users?.length === 0 && (
+                <tr
+                  style={{ color: "red", fontWeight: "bold", padding: "10px" }}
+                >
+                  <td>sem usuarios para exibir</td>
+                </tr>
+              )}
+              {searchUser.map((user: User, index: any) => (
+                <tr key={index}>
+                  <td data-label="id: ">{user?.id}</td>
+                  <td data-label="nome: ">{user?.name}</td>
+                  <td data-label="idade: ">{user?.age}</td>
+                  <td data-label="ocupação: ">{user?.occupation}</td>
+                  <td className="actions-list">
+                    <button
+                      className="edit-btn"
+                      onClick={() => onEditUser(user)}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => onOpenDeleteUserModal(user)}
+                    >
+                      Deletar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
       </>
     );
 }
