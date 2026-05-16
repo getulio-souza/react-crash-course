@@ -4,7 +4,6 @@ import { UserForm } from "../pages/userForm/UserForm";
 import { useEffect, useState } from "react";
 import type { User } from "../types/User";
 import { removeSelectedUser } from "../services/CrudUsers";
-import Header from "../components/header/Header";
 import MainLayout from "../layouts/MainLayout";
 
 function AppRouter() {

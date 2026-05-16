@@ -35,7 +35,8 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     }
 
     //funcao para deletar o usuario de vez (botão deletar no modal)
-    function onConfirmDeleteUser(selectedUser: User){
+  function onConfirmDeleteUser(selectedUser: User) {
+      console.log('usuario no on confirme delete user:', selectedUser)
        setRemoveUser(selectedUser)
     }
 
@@ -109,7 +110,6 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     console.log('chamou o limpar filtros!')
 
     //essa funcao tem que retornar a lista original 
-    users;
     //limpar tambem a opção selecionada no select
     setSortUsers('');
     setSearchUser([])
@@ -129,9 +129,10 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
         <section className="list-container">
           {/* modal de deleção */}
           {showDeleteModal && (
-            <DeleteUserModal 
-              setShowDeleteModal={setShowDeleteModal} 
-              setSelectedUser={onConfirmDeleteUser}
+            <DeleteUserModal
+              setShowDeleteModal={setShowDeleteModal}
+              selectedUser={selectedUser}
+              onConfirmDeleteUser={onConfirmDeleteUser}
             />
           )}
 
