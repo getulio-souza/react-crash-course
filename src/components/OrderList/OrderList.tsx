@@ -7,11 +7,8 @@ type Props = {
 
 function OrderList({ setSortUsers }: Props) {
   
-
   //funcao para pegar a opcao selecionada no select
   function onSelectOption(event: ChangeEvent<HTMLSelectElement>) {
-    console.log('selecionou uma opcao no select do order list:', event.target.value)
-
     setSortUsers(event.target.value)
   }
 

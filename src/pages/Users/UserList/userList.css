@@ -1,6 +1,7 @@
 .list-container{
   width: 1500px;
   margin: 0 auto;
+  position: relative;
 }
 
 table {
