@@ -1,13 +1,42 @@
-import React from 'react'
 import "./Pagination.css"
 
-const UsersPagination = () => {
+type Props = {
+    currentPage: number;
+    itemsPerPage: number;
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+}
 
-    const pageNumbers: number[] = [2,3,4,5,6,7,8,9,10];
+const UsersPagination = ({currentPage, itemsPerPage, setCurrentPage}: Props) => {
+
+    const pageNumbers: number[] = [1,2,3,4,5,6,7,8,9,10];
+
+    const totalPages = currentPage * itemsPerPage;
+
+    function onMoveToFirstPage(){
+
+       
+    }
+
+    function onMoveToPreviousPage(){
+        setCurrentPage(currentPage -1)
+        console.log('pagina atual no anterior:',currentPage)
+    }
+    
+
+
+    function onMoveToNextPage(){
+        setCurrentPage(currentPage + 1)
+        console.log('pagina atual no proximo:',currentPage)
+    }
+
+    function onMoveToNextPageLastPage(){
+
+    }
     
     return (
     <section className="pagination-container">
-        <button className='prev-btn'>Primeira</button>
+        <button onClick={onMoveToFirstPage} className='prev-btn'>Primeira</button>
+        <button onClick={onMoveToPreviousPage} className='prev-btn'>Anterior</button>
         
         {/* no meio vai a quantidade de paginas de acordo com a quantidade de usuários */}
         <div className="pagination-number">
@@ -16,7 +45,8 @@ const UsersPagination = () => {
         })}
         </div>
         
-        <button className='next-btn'>Última</button>
+        <button onClick={onMoveToNextPage} className='next-btn'>Próxima</button>
+        <button onClick={onMoveToNextPageLastPage} className='next-btn'>Última</button>
     </section>
   )
 }

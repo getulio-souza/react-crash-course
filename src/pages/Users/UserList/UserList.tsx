@@ -29,7 +29,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   //states para paginação
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(10)
+  const [itemsPerPage, setItemsPerPage] = useState<number>(5)
 
   //metodo para abrir o modal de deleção
     function onOpenDeleteUserModal(selectedUser: User){
@@ -141,8 +141,6 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   function moveToLastPage(){}
 
-
-
     useEffect(()=> {
       setSearchUser(users)
     }, [users])
@@ -213,7 +211,11 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
               ))}
             </tbody>
           </table>
-        <UsersPagination />
+        <UsersPagination
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+        />
         </section>
 
       </>
