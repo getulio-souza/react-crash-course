@@ -17,6 +17,9 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   //filtros
   const [searchUser, setSearchUser] = useState<User[]>(users);
+
+  const [userInputText, setUserInputText] = useState<string>('');
+
   const [sortUsers, setSortUsers] = useState('');
 
   const [selectedUser, setSelectedUser] = useState<User>();
@@ -63,7 +66,10 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
       console.log('novo usuario filtrado:', newUserList)
 
       //com o usuario filtrado retornado, atualizar a tabela 
-      setSearchUser(newUserList)
+      setSearchUser(newUserList)    
+
+      //guardando o valor do input no meu state que manipula o texto digitado 
+      setUserInputText(userInput)
   }
   
 
@@ -108,13 +114,19 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     }
   }
 
-  function onCleanFilters(){
+  function onClearFilters(){
     console.log('chamou o limpar filtros!')
 
-    //essa funcao tem que retornar a lista original 
-    //limpar tambem a opção selecionada no select
-    setSortUsers('');
-    setSearchUser([])
+    console.log('lista original no clear filters:', users)
+
+    //resgatando a lista original
+    setSearchUser(users)
+
+    //limpando o campo de input
+    console.log('valor antes de limpar:',userInputText)
+    setUserInputText('')
+
+    console.log('valor a limpar:',userInputText)
 
   }
 
@@ -143,9 +155,9 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
           {/* filtros */}
           <div className="filters-container">
-            <UserFilter setSearchUser={onSearchUsers} />
+            <UserFilter userInputText={userInputText} setSearchUser={onSearchUsers} />
             <OrderList setSortUsers={onSortUsers} />
-            <button onClick={onCleanFilters}>clear Filters</button>
+            <button onClick={onClearFilters}>clear Filters</button>
           </div>
 
           <table>

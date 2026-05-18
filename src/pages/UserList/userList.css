@@ -128,3 +128,12 @@ tbody tr:hover {
 .edit-btn:hover{
   opacity: 0.8;
 }
+.filters-container button{
+  cursor: pointer;
+  transition: .5s;
+  border-radius: 8px;
+}
+
+.filters-container button:hover{
+  opacity: 0.7;
+}

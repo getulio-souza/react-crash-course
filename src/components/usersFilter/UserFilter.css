@@ -4,6 +4,10 @@
     gap: 0.5rem;
 }
 
+.filter-container input::placeholder{
+    color: grey;
+}
+
 .filter-input-and-btn{
     display: flex;
     gap:0.5rem;
@@ -13,3 +17,4 @@
     width: 100px;
     cursor: pointer;
 }
+
