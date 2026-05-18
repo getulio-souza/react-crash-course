@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import type { User } from '../../types/User';
-import UserFilter from '../../components/usersFilter/UserFilter';
 import './userList.css'
-import OrderList from '../../components/OrderList/OrderList';
+import { useEffect, useState } from 'react';
+import type { User } from '../../../types/User';
+import UserFilter from '../../../components/usersFilter/UserFilter';
+import OrderList from '../../../components/OrderList/OrderList';
 import { useNavigate } from 'react-router-dom';
-import DeleteUserModal from '../../components/DeleteUserModal/DeleteUserModal';
+import DeleteUserModal from '../../../components/DeleteUserModal/DeleteUserModal';
 
 type Props = {
     users: User[];
-    setEditUser: React.Dispatch<React.SetStateAction<User>>;
-    setRemoveUser: React.Dispatch<React.SetStateAction<User>>;
+    setEditUser: (user: any) => void;
+    setRemoveUser: (user: any) => void;
 }
 
 export function UserList({users, setEditUser, setRemoveUser}: Props){    
@@ -118,14 +118,13 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     console.log('lista original no clear filters:', users)
 
     //resgatando a lista original
-    setSearchUser(users)
+    setSearchUser(users);
 
     //limpando o campo de input
-    console.log('valor antes de limpar:',userInputText)
-    setUserInputText('')
+    setUserInputText('');
 
-    console.log('valor a limpar:',userInputText)
-
+    //limpando filtro de ordenação
+    setSortUsers('');
   }
 
 
@@ -148,23 +147,23 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
             />
           ) : null}
 
-          <h2>Lista de usurios</h2>
+          <h2>Lista de usuários</h2>
 
           {/* filtros */}
           <div className="filters-container">
             <UserFilter userInputText={userInputText} setSearchUser={onSearchUsers} />
             <OrderList setSortUsers={onSortUsers} />
-            <button onClick={onClearFilters}>clear Filters</button>
+            <button onClick={onClearFilters}>Clear Filters</button>
           </div>
 
           <table>
             <thead>
               <tr>
                 <th>id</th>
-                <th>Name</th>
-                <th>age</th>
-                <th>Ocupation</th>
-                <th>Action</th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Ocupação</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -172,7 +171,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
                 <tr
                   style={{ color: "red", fontWeight: "bold", padding: "10px" }}
                 >
-                  <td>sem usuarios para exibir</td>
+                  <td>Sem usuários para exibir.</td>
                 </tr>
               )}
               {searchUser.map((user: User, index: any) => (

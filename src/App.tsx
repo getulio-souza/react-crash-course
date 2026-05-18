@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { UserForm } from "./pages/userForm/UserForm";
-import { UserList } from "./pages/UserList/UserList";
+import { UserForm } from "./pages/Users/userForm/UserForm";
+import { UserList } from "./pages/Users/UserList/UserList";
 import type { User } from "./types/User";
 import Header from "./components/header/Header";
 

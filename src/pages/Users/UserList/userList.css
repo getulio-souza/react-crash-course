@@ -116,27 +116,36 @@ tbody tr:hover {
 .edit-btn{
    background-color: #2563eb;
    transition: .5s;
+   font-weight: 600;
 }
 
 .delete-btn{
   background-color: rgb(203, 42, 42);
   transition: .5s;
-}
-
-.delete-btn:hover{
-  opacity: 0.8;
+  font-weight: 600;
 }
 
 .edit-btn:hover{
-  opacity: 0.8;
+  background-color: white;
+  color: #2563eb;
+}
+
+.delete-btn:hover{
+  background-color: white;
+  color: rgb(203, 42, 42);
 }
 .filters-container button{
   cursor: pointer;
   transition: .5s;
   border-radius: 8px;
+  font-weight: 600;
+  background-color: #2563eb;
+  color: #fff;
+
 }
 
 .filters-container button:hover{
-  background-color: #2563eb;
-  color: #fff;
+  background-color: white;
+  color: #2563eb;
+;
 }

@@ -3,7 +3,7 @@ form {
   max-width: 400px;
   margin: 30px auto;
   padding: 20px;
-  background-color: black;
+  background-color: #212121;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -63,7 +63,15 @@ input::placeholder{
   font-size: 15px;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: .5s;
+  font-weight: 600;
+
+}
+
+.submit-btn:hover{
+  background-color: white;
+  color: #2563eb;
+  font-weight: 600;
 }
 
 

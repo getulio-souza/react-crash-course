@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./userForm.css";
-import type { User } from "../../types/User";
+import type { User } from "../../../types/User";
 import { useNavigate } from "react-router-dom";
 
 type Props = {

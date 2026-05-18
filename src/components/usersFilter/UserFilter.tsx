@@ -17,7 +17,7 @@ function UserFilter({setSearchUser, userInputText}: Props){
     return(
         <>
         <div className="filter-container">
-        <span>filtro de usuarios: </span>
+        <span>Filtro de usuários: </span>
         <div className="filter-input-and-btn">
         <input 
         placeholder="digite o nome do usuario"

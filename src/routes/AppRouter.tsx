@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { UserList } from "../pages/UserList/UserList";
-import { UserForm } from "../pages/userForm/UserForm";
+import { UserList } from "../pages/Users/UserList/UserList";
+import { UserForm } from "../pages/Users/userForm/UserForm";
 import { useEffect, useState } from "react";
 import type { User } from "../types/User";
-import { removeSelectedUser } from "../services/CrudUsers";
+import { removeSelectedUser } from "../services/usersService";
 import MainLayout from "../layouts/MainLayout";
 
 function AppRouter() {
