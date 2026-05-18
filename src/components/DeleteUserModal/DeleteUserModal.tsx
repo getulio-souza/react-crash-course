@@ -19,8 +19,6 @@ function DeleteUserModal({setShowDeleteModal, selectedUser, onConfirmDeleteUser}
       setShowDeleteModal(false);
     }
 
-
-
     return(
         <>
         <article className='delete-modal-container'>

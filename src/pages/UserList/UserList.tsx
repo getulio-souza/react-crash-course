@@ -27,7 +27,6 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   //state para o modal de deleção
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showDeleteMessage, setShowDeleteMessage] = useState(false);
 
   //metodo para abrir o modal de deleção
     function onOpenDeleteUserModal(selectedUser: User){
@@ -41,7 +40,6 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     //funcao para deletar o usuario de vez (botão deletar no modal)
   function onConfirmDeleteUser(selectedUser: User) {
       console.log('usuario no on confirme delete user:', selectedUser)
-      setShowDeleteMessage(true);
       setRemoveUser(selectedUser)
     }
 
@@ -141,17 +139,16 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     return (
       <>
         <section className="list-container">
-          {/* modal de deleção */}
-          {showDeleteModal && (
+          {/* modal de deleção - verifica antes se o usuario selecionado existe */ }
+          {selectedUser ? showDeleteModal && (
             <DeleteUserModal
               setShowDeleteModal={setShowDeleteModal}
-              setShowDeleteMessage={setShowDeleteMessage}
               selectedUser={selectedUser}
               onConfirmDeleteUser={onConfirmDeleteUser}
             />
-          )}
+          ) : null}
 
-          <h2>lista de usuarios</h2>
+          <h2>Lista de usurios</h2>
 
           {/* filtros */}
           <div className="filters-container">
