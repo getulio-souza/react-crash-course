@@ -5,6 +5,7 @@ import UserFilter from '../../../components/usersFilter/UserFilter';
 import OrderList from '../../../components/OrderList/OrderList';
 import { useNavigate } from 'react-router-dom';
 import DeleteUserModal from '../../../components/DeleteUserModal/DeleteUserModal';
+import UsersPagination from '../../../components/Pagination/Pagination';
 
 type Props = {
     users: User[];
@@ -17,16 +18,18 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   //filtros
   const [searchUser, setSearchUser] = useState<User[]>(users);
-
   const [userInputText, setUserInputText] = useState<string>('');
-
   const [sortUsers, setSortUsers] = useState('');
 
+  //select user
   const [selectedUser, setSelectedUser] = useState<User>();
-
 
   //state para o modal de deleção
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  //states para paginação
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(10)
 
   //metodo para abrir o modal de deleção
     function onOpenDeleteUserModal(selectedUser: User){
@@ -127,6 +130,18 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     setSortUsers('');
   }
 
+  //funcao para mudar de pagina
+  function moveToNextPage(){
+
+  }
+
+  function moveToPreviousPage(){}
+
+  function moveToFirstPage(){}
+
+  function moveToLastPage(){}
+
+
 
     useEffect(()=> {
       setSearchUser(users)
@@ -198,7 +213,9 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
               ))}
             </tbody>
           </table>
+        <UsersPagination />
         </section>
+
       </>
     );
 }
