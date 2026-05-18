@@ -115,10 +115,12 @@ tbody tr:hover {
 
 .edit-btn{
    background-color: #2563eb;
+   transition: .5s;
 }
 
 .delete-btn{
   background-color: rgb(203, 42, 42);
+  transition: .5s;
 }
 
 .delete-btn:hover{
@@ -135,5 +137,6 @@ tbody tr:hover {
 }
 
 .filters-container button:hover{
-  opacity: 0.7;
+  background-color: #2563eb;
+  color: #fff;
 }

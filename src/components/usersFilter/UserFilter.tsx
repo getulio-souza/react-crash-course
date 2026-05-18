@@ -2,7 +2,7 @@ import type { ChangeEvent } from "react";
 import "./UserFilter.css"
 
 type Props = {
-    setSearchUser: React.Dispatch<React.SetStateAction<string>>;
+    setSearchUser: (userInput: string) => void;
     userInputText: string;
 }
 

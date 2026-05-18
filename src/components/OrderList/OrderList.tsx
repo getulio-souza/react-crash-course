@@ -1,9 +1,8 @@
-import type React from "react"
 import "./OrderList.css"
 import type { ChangeEvent } from "react"
 
 type Props = {
-  setSortUsers: React.Dispatch<React.SetStateAction<string>>
+  setSortUsers: (selectedOption: any) => void
 }
 
 function OrderList({ setSortUsers }: Props) {
