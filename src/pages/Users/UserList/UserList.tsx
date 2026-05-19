@@ -144,6 +144,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
     useEffect(()=> {
       setSearchUser(users)
+      console.log('users:', users)
     }, [users])
 
     useEffect(()=> {

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./Pagination.css"
 
 type Props = {
@@ -10,7 +11,11 @@ const UsersPagination = ({currentPage, itemsPerPage, setCurrentPage}: Props) => 
 
     const pageNumbers: number[] = [1,2,3,4,5,6,7,8,9,10];
 
-    const totalPages = currentPage * itemsPerPage;
+    const totalItems = currentPage * itemsPerPage;
+
+    useEffect(()=> {
+    console.log(totalPages)
+    }, [])
 
     function onMoveToFirstPage(){
 
