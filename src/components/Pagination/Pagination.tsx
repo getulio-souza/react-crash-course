@@ -1,21 +1,16 @@
 import { useEffect } from "react";
 import "./Pagination.css"
+import type { User } from "../../types/User";
 
 type Props = {
     currentPage: number;
     itemsPerPage: number;
-    setCurrentPage: ()=> void
+    totalUsers: number;
 }
 
-const UsersPagination = ({currentPage, itemsPerPage, setCurrentPage}: Props) => {
+const UsersPagination = ({currentPage, itemsPerPage, totalUsers}: Props) => {
 
     const pageNumbers: number[] = [1,2,3,4,5,6,7,8,9,10];
-
-    const totalItems = currentPage * itemsPerPage;
-
-    useEffect(()=> {
-    console.log(totalPages)
-    }, [])
 
     function onMoveToFirstPage(){
 
@@ -26,6 +21,9 @@ const UsersPagination = ({currentPage, itemsPerPage, setCurrentPage}: Props) => 
     }
     
     function onMoveToNextPage(){
+     currentPage
+     itemsPerPage
+     totalUsers
     }
 
     function onMoveToNextPageLastPage(){
