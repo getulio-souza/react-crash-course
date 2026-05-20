@@ -6,6 +6,7 @@ import OrderList from '../../../components/OrderList/OrderList';
 import { useNavigate } from 'react-router-dom';
 import DeleteUserModal from '../../../components/DeleteUserModal/DeleteUserModal';
 import UsersPagination from '../../../components/Pagination/Pagination';
+import { CrueltyFree } from '@mui/icons-material';
 
 type Props = {
     users: User[];
@@ -149,12 +150,22 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   }
 
   function moveToPreviousPage(){
+    //se a pagina atual for a primeira pagina, apenas da return
+    if(currentPage === 1){
+      return;
+    } 
     setCurrentPage(currentPage - 1)
   }
 
-  function moveToFirstPage(){}
+  function moveToFirstPage(){
+    setCurrentPage(currentPage - 1)
+  }
 
-  function moveToLastPage(){}
+  function moveToLastPage(){
+    if(currentPage <= totalPages){
+      setCurrentPage(totalPages)
+    }
+  }
 
     useEffect(()=> {
       setSearchUser(users.slice(0,5))
@@ -228,6 +239,8 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
           itemsPerPage={itemsPerPage}
           moveToNextPage={moveToNextPage}
           moveToPreviousPage={moveToPreviousPage}
+          moveToFirstPage={moveToFirstPage}
+          moveToLastPage={moveToLastPage}
           totalPages={totalPages}
         />
         </section>

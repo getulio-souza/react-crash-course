@@ -5,10 +5,12 @@ type Props = {
     itemsPerPage: number;
     moveToNextPage: () => void;
     moveToPreviousPage: () => void;
+    moveToFirstPage: () => void;
+    moveToLastPage: () => void;
     totalPages: number;
 }
 
-const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage, moveToPreviousPage}: Props) => {
+const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage, moveToPreviousPage, moveToFirstPage, moveToLastPage}: Props) => {
 
     const pageNumbers: number[] = [];
 
@@ -24,7 +26,7 @@ const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage,
     console.log(pageNumbers)
 
     function onMoveToFirstPage(){
-
+        moveToFirstPage();
     }
 
     function onMoveToPreviousPage(){
@@ -37,7 +39,7 @@ const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage,
     }
 
     function onMoveToNextPageLastPage(){
-
+        moveToLastPage()
     }
     
     return (
