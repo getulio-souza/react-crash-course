@@ -35,6 +35,9 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   const totalPages = Math.ceil(users.length / itemsPerPage)
   console.log('total pages no pai:', totalPages)
 
+  console.log('items por pagina:', itemsPerPage)
+
+
   //metodo para abrir o modal de deleção
     function onOpenDeleteUserModal(selectedUser: User){
       console.log('usuario selecionado para deletar no modal:', selectedUser)
@@ -143,16 +146,10 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     }
 
     setCurrentPage(currentPage + 1)
-    console.log(currentPage) 
   }
 
   function moveToPreviousPage(){
-    if(currentPage <= totalPages){
-      return;
-    }
-
     setCurrentPage(currentPage - 1)
-    console.log(currentPage) 
   }
 
   function moveToFirstPage(){}
@@ -160,7 +157,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   function moveToLastPage(){}
 
     useEffect(()=> {
-      setSearchUser(users)
+      setSearchUser(users.slice(0,5))
     }, [users])
   
     return (

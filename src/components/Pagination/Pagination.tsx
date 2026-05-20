@@ -46,9 +46,11 @@ const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage,
         <button onClick={onMoveToPreviousPage} className='prev-btn'>Anterior</button>
         
         {/* no meio vai a quantidade de paginas de acordo com a quantidade de usuários */}
-        <div className="pagination-number">
+        <div
+         className="pagination-number"
+         >
         {pageNumbers.map((item, index)=> {
-            return(<span key={index}>{item}</span>)
+            return(<span className={item === currentPage ? 'currentPage' : 'otherPages'} key={index}>{item}</span>)
         })}
         </div>
         

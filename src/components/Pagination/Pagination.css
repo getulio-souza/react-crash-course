@@ -13,8 +13,6 @@
 }
 
 .pagination-number span{
-    background-color: white;
-    color: #2563eb;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
@@ -49,4 +47,14 @@
 .next-btn:hover{
     background-color: #2563eb;
     color: white;
+}
+
+.currentPage{
+    background-color: #2563eb;
+    color: white;
+}
+
+.otherPages{
+    background-color: white;
+    color: #2563eb;
 }
