@@ -229,6 +229,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
               </tr>
             </thead>
             <tbody>
+
               {users?.length === 0 && (
                 <tr
                   style={{ color: "red", fontWeight: "bold", padding: "10px" }}
@@ -236,6 +237,9 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
                   <td>Sem usuários para exibir.</td>
                 </tr>
               )}
+
+              {/* aqui preciso usar currentPage e itemsPerPage para exibir a quantidade de items por pagina ao inves da lista inteira */}
+
               {searchUser.map((user: User, index: any) => (
                 <tr key={index}>
                   <td data-label="id: ">{user?.id}</td>
