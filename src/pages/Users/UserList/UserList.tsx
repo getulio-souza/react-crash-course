@@ -240,7 +240,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
               {/* aqui preciso usar currentPage e itemsPerPage para exibir a quantidade de items por pagina ao inves da lista inteira */}
 
-              {searchUser.map((user: User, index: any) => (
+              {users.slice(currentPage, itemsPerPage).map((user: User, index: any) => (
                 <tr key={index}>
                   <td data-label="id: ">{user?.id}</td>
                   <td data-label="nome: ">{user?.name}</td>
