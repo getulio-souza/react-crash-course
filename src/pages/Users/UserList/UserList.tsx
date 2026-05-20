@@ -30,7 +30,11 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   //states para paginação
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5)
-  const [totalUsers, setTotalUsers] = useState<number>()
+  const [totalPages, setTotalPages] = useState<number>()
+
+  //numero de páginas
+  const calculateTotalPages = Math.ceil(users.length / itemsPerPage)
+  console.log('total pages no pai:', totalPages)
 
   //metodo para abrir o modal de deleção
     function onOpenDeleteUserModal(selectedUser: User){
@@ -133,14 +137,14 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   //funcao para mudar de pagina
   function moveToNextPage(){
+    
+    if(currentPage >= calculateTotalPages){
+      console.log('a pagina atual é maior do que a quantidade de paginas, nao tem como ir para a proxima pagina')
+      return;
+    }
+
     setCurrentPage(currentPage + 1)
-    console.log(currentPage)
-
-       console.log('total users que chegou no filho:',totalUsers)
-        console.log('items por pagina:', itemsPerPage)
-        console.log('pagina atual:', currentPage)
-
-
+    console.log(currentPage) 
   }
 
   function moveToPreviousPage(){}
@@ -151,15 +155,12 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
     useEffect(()=> {
       setSearchUser(users)
-      console.log('users:', users)
-
-      setTotalUsers(users.length)
-
     }, [users])
 
     useEffect(()=> {
-    }, [])
-
+      setTotalPages(calculateTotalPages)
+    }, [totalPages])
+  
     return (
       <>
         <section className="list-container">
@@ -226,7 +227,8 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
         <UsersPagination
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
-          totalUsers={totalUsers}
+          moveToNextPage={moveToNextPage}
+          totalPages={calculateTotalPages}
         />
         </section>
 

@@ -1,16 +1,17 @@
-import { useEffect } from "react";
 import "./Pagination.css"
-import type { User } from "../../types/User";
 
 type Props = {
     currentPage: number;
     itemsPerPage: number;
-    totalUsers: number;
+    moveToNextPage: () => void
+    totalPages: number;
 }
 
-const UsersPagination = ({currentPage, itemsPerPage, totalUsers}: Props) => {
+const UsersPagination = ({currentPage, itemsPerPage, moveToNextPage, totalPages}: Props) => {
 
-    const pageNumbers: number[] = [1,2,3,4,5,6,7,8,9,10];
+    const pageNumbers: number[] = [totalPages];
+
+    //para pegar o total de paginas preciso dividir o totalitems / itemperpage
 
     function onMoveToFirstPage(){
 
@@ -21,9 +22,7 @@ const UsersPagination = ({currentPage, itemsPerPage, totalUsers}: Props) => {
     }
     
     function onMoveToNextPage(){
-     currentPage
-     itemsPerPage
-     totalUsers
+        moveToNextPage();
     }
 
     function onMoveToNextPageLastPage(){
@@ -37,8 +36,8 @@ const UsersPagination = ({currentPage, itemsPerPage, totalUsers}: Props) => {
         
         {/* no meio vai a quantidade de paginas de acordo com a quantidade de usuários */}
         <div className="pagination-number">
-        {pageNumbers.map((item)=> {
-            return(<span>{item}</span>)
+        {pageNumbers.map((item, index)=> {
+            return(<span key={index}>{item}</span>)
         })}
         </div>
         
@@ -48,4 +47,5 @@ const UsersPagination = ({currentPage, itemsPerPage, totalUsers}: Props) => {
   )
 }
 
-export default UsersPagination
+
+export default UsersPagination;
