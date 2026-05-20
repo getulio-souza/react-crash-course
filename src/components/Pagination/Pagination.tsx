@@ -3,21 +3,32 @@ import "./Pagination.css"
 type Props = {
     currentPage: number;
     itemsPerPage: number;
-    moveToNextPage: () => void
+    moveToNextPage: () => void;
+    moveToPreviousPage: () => void;
     totalPages: number;
 }
 
-const UsersPagination = ({currentPage, itemsPerPage, moveToNextPage, totalPages}: Props) => {
+const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage, moveToPreviousPage}: Props) => {
 
-    const pageNumbers: number[] = [totalPages];
+    const pageNumbers: number[] = [];
 
-    //para pegar o total de paginas preciso dividir o totalitems / itemperpage
+    let firstPage: number = 1;
+
+    const lastPage: number = totalPages;
+
+    while(firstPage <= lastPage){
+        pageNumbers.push(firstPage)
+        firstPage = firstPage + 1
+    }
+
+    console.log(pageNumbers)
 
     function onMoveToFirstPage(){
 
     }
 
     function onMoveToPreviousPage(){
+        moveToPreviousPage();
 
     }
     

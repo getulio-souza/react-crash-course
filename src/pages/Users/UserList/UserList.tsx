@@ -29,11 +29,10 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   //states para paginação
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(5)
-  const [totalPages, setTotalPages] = useState<number>()
+  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
 
   //numero de páginas
-  const calculateTotalPages = Math.ceil(users.length / itemsPerPage)
+  const totalPages = Math.ceil(users.length / itemsPerPage)
   console.log('total pages no pai:', totalPages)
 
   //metodo para abrir o modal de deleção
@@ -138,7 +137,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   //funcao para mudar de pagina
   function moveToNextPage(){
     
-    if(currentPage >= calculateTotalPages){
+    if(currentPage >= totalPages){
       console.log('a pagina atual é maior do que a quantidade de paginas, nao tem como ir para a proxima pagina')
       return;
     }
@@ -147,7 +146,14 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     console.log(currentPage) 
   }
 
-  function moveToPreviousPage(){}
+  function moveToPreviousPage(){
+    if(currentPage <= totalPages){
+      return;
+    }
+
+    setCurrentPage(currentPage - 1)
+    console.log(currentPage) 
+  }
 
   function moveToFirstPage(){}
 
@@ -156,10 +162,6 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     useEffect(()=> {
       setSearchUser(users)
     }, [users])
-
-    useEffect(()=> {
-      setTotalPages(calculateTotalPages)
-    }, [totalPages])
   
     return (
       <>
@@ -228,7 +230,8 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
           moveToNextPage={moveToNextPage}
-          totalPages={calculateTotalPages}
+          moveToPreviousPage={moveToPreviousPage}
+          totalPages={totalPages}
         />
         </section>
 
