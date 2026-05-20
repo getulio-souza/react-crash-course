@@ -32,11 +32,24 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
 
+
+  //quantidade de items por pagina
+  const usersPerPage = users.slice(currentPage, itemsPerPage)
+  console.log('usuarios por pagina:', usersPerPage)
+
+
   //numero de páginas
   const totalPages = Math.ceil(users.length / itemsPerPage)
   console.log('total pages no pai:', totalPages)
 
   console.log('items por pagina:', itemsPerPage)
+
+  console.log('usuarios retornados:', users.length)
+
+  console.log('current page:', currentPage)
+
+  //se estiver na primeira pagina, mostra apenas os 5 primeiros items
+  console.log('current page + items per page:', currentPage + itemsPerPage)
 
 
   //metodo para abrir o modal de deleção
@@ -147,6 +160,19 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     }
 
     setCurrentPage(currentPage + 1)
+
+    //atualiza a lista de acordo com o que vai ser exibido na proxima pagina 
+    console.log('lista original de users:', users)
+    users = users.slice(currentPage, itemsPerPage)
+
+    console.log('lista paginada:', users)
+
+    //se o numero de usuarios da minha lista completa 
+    // for maior do que a quantidade de items por pagina,
+    if(users.length > itemsPerPage){
+      
+    }
+
   }
 
   function moveToPreviousPage(){
@@ -168,7 +194,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   }
 
     useEffect(()=> {
-      setSearchUser(users.slice(0,5))
+      setSearchUser(users)
     }, [users])
   
     return (
