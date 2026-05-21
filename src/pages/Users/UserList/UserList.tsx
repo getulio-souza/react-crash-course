@@ -132,27 +132,18 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   //funcao para mudar de pagina
   function moveToNextPage(){
-    
-    if(currentPage >= totalPages){
-      return;
-    }
-
+    if(currentPage >= totalPages) return;
     setCurrentPage(currentPage + 1);
   }
 
   function moveToPreviousPage(){
-    if(currentPage === 1){
-      return;
-    } 
+    if(currentPage === 1) return;
     setCurrentPage(currentPage - 1)
   }
 
   function moveToFirstPage(){
-    if(currentPage === 1){
-      return;
-    } 
-    setCurrentPage(currentPage - 1)
-    
+    if(currentPage === 1) return;
+    setCurrentPage(1)
   }
 
   function moveToLastPage(){
@@ -162,7 +153,6 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   }
 
   function moveToPageOnClick(selectedPage: number ){
-    console.log('pagina selecionada no pai:', selectedPage)
 
     if(selectedPage > currentPage){
       setCurrentPage(currentPage + 1)
