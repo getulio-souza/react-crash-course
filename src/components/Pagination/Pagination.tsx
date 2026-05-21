@@ -1,4 +1,3 @@
-import type { User } from "../../types/User";
 import "./Pagination.css"
 
 type Props = {
@@ -8,11 +7,11 @@ type Props = {
     moveToPreviousPage: () => void;
     moveToFirstPage: () => void;
     moveToLastPage: () => void;
-    moveToPageOnClick: (selectedUser) => void;
+    moveToPageOnClick: (selectedUser: any) => void;
     totalPages: number;
 }
 
-const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage, moveToPreviousPage, moveToFirstPage, moveToLastPage, moveToPageOnClick}: Props) => {
+const UsersPagination = ({currentPage, totalPages, moveToNextPage, moveToPreviousPage, moveToFirstPage, moveToLastPage, moveToPageOnClick}: Props) => {
 
     const pageNumbers: number[] = [];
 
@@ -54,7 +53,7 @@ const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage,
         <button onClick={onMoveToFirstPage} className='prev-btn'>Primeira</button>
         <button onClick={onMoveToPreviousPage} className='prev-btn'>Anterior</button>
         
-        {/* no meio vai a quantidade de paginas de acordo com a quantidade de usuários */}
+        {/*quantidade de paginas de acordo com a quantidade de usuários */}
         <div
          className="pagination-number"
          >
