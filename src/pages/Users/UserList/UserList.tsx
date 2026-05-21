@@ -30,14 +30,16 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   //states para paginação
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(3);
 
   //numero de páginas
   let totalPages = Math.ceil(searchUser.length / itemsPerPage)
   console.log('numero de paginas:', totalPages)
 
   //se o numero de pagina for 1, mostrar a apenas a pagina com os items filtrados
-  if*
+  if(totalPages === 1){
+    moveToPreviousPage()
+  }
 
   //metodo para abrir o modal de deleção
     function onOpenDeleteUserModal(selectedUser: User){
