@@ -21,17 +21,19 @@ function DeleteUserModal({setShowDeleteModal, selectedUser, onConfirmDeleteUser}
 
     return(
         <>
+        <section className='overlay'>
         <article className='delete-modal-container'>
             <div className='close-modal-icon' onClick={onCancelDeleteUser}><CloseIcon/></div>
             <h3 className="delete-user-message">
-                Tem certeza que deseja excluir o usuario: 
+                Tem certeza que deseja excluir o usuario: <span style={{ color: 'red', marginBottom: '10px' }}>{selectedUser.name}</span>
             </h3>
-          <span style={{ color: 'red', marginBottom: '10px' }}>{selectedUser.name}</span>
+          
             <div className="btn-container">
                 <button onClick={onCancelDeleteUser} className="btn-cancel">Cancelar</button>
                 <button onClick={onDeleteUser} className="btn-save">Confirmar</button>
             </div>
         </article>
+        </section>
         </>
     )
 }
