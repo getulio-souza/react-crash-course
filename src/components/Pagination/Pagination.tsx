@@ -1,3 +1,4 @@
+import type { User } from "../../types/User";
 import "./Pagination.css"
 
 type Props = {
@@ -7,10 +8,11 @@ type Props = {
     moveToPreviousPage: () => void;
     moveToFirstPage: () => void;
     moveToLastPage: () => void;
+    moveToPageOnClick: (selectedUser) => void;
     totalPages: number;
 }
 
-const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage, moveToPreviousPage, moveToFirstPage, moveToLastPage}: Props) => {
+const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage, moveToPreviousPage, moveToFirstPage, moveToLastPage, moveToPageOnClick}: Props) => {
 
     const pageNumbers: number[] = [];
 
@@ -41,6 +43,11 @@ const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage,
     function onMoveToNextPageLastPage(){
         moveToLastPage()
     }
+
+    function onMoveToPageOnClick(selectedPage: number){
+        console.log('trocou de pagina clicando no numero da pagina!', selectedPage)
+        moveToPageOnClick(selectedPage)
+    }
     
     return (
     <section className="pagination-container">
@@ -52,7 +59,7 @@ const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage,
          className="pagination-number"
          >
         {pageNumbers.map((item, index)=> {
-            return(<span className={item === currentPage ? 'currentPage' : 'otherPages'} key={index}>{item}</span>)
+            return(<span onClick={()=> onMoveToPageOnClick(item)} className={item === currentPage ? 'currentPage' : 'otherPages'} key={index}>{item}</span>)
         })}
         </div>
         

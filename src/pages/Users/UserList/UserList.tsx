@@ -161,6 +161,16 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     }
   }
 
+  function moveToPageOnClick(selectedPage: number ){
+    console.log('pagina selecionada no pai:', selectedPage)
+
+    if(selectedPage > currentPage){
+      setCurrentPage(currentPage + 1)
+    } else{
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
   function calculateIndexes(){
     const lastIndexPage =  currentPage * itemsPerPage;
     const firstIndexPage = lastIndexPage - itemsPerPage 
@@ -252,6 +262,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
           moveToPreviousPage={moveToPreviousPage}
           moveToFirstPage={moveToFirstPage}
           moveToLastPage={moveToLastPage}
+          moveToPageOnClick={moveToPageOnClick}
           totalPages={totalPages}
         />
         </section>
