@@ -34,8 +34,6 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
 
   //quantidade de items por pagina
-  const usersPerPage = users.slice(currentPage, itemsPerPage)
-  console.log('usuarios por pagina:', usersPerPage)
 
 
   //numero de páginas
@@ -44,7 +42,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   console.log('items por pagina:', itemsPerPage)
 
-  console.log('usuarios retornados:', users.length)
+  console.log('usuarios retornados:', users)
 
   console.log('current page:', currentPage)
 
@@ -184,13 +182,29 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   }
 
   function moveToFirstPage(){
+    if(currentPage === 1){
+      return;
+    } 
     setCurrentPage(currentPage - 1)
+    
   }
 
   function moveToLastPage(){
     if(currentPage <= totalPages){
       setCurrentPage(totalPages)
     }
+  }
+
+  function calculateIndexes(){
+
+    const lastIndexPage =  currentPage * itemsPerPage;
+    console.log('lastIndexPage:', lastIndexPage)
+    
+    const firstIndexPage = lastIndexPage - itemsPerPage 
+    console.log('firstIndexPage:',firstIndexPage)
+    
+    return users.slice(firstIndexPage, lastIndexPage)
+
   }
 
     useEffect(()=> {
@@ -238,9 +252,9 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
                 </tr>
               )}
 
-              {/* aqui preciso usar currentPage e itemsPerPage para exibir a quantidade de items por pagina ao inves da lista inteira */}
 
-              {users.slice(currentPage, itemsPerPage).map((user: User, index: any) => (
+              
+              {calculateIndexes().map((user: User, index: any) => (
                 <tr key={index}>
                   <td data-label="id: ">{user?.id}</td>
                   <td data-label="nome: ">{user?.name}</td>
