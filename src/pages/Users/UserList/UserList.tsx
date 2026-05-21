@@ -32,48 +32,28 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
 
-
-  //quantidade de items por pagina
-
-
   //numero de páginas
-  const totalPages = Math.ceil(users.length / itemsPerPage)
-  console.log('total pages no pai:', totalPages)
+  let totalPages = Math.ceil(searchUser.length / itemsPerPage)
+  console.log('numero de paginas:', totalPages)
 
-  console.log('items por pagina:', itemsPerPage)
-
-  console.log('usuarios retornados:', users)
-
-  console.log('current page:', currentPage)
-
-  //se estiver na primeira pagina, mostra apenas os 5 primeiros items
-  console.log('current page + items per page:', currentPage + itemsPerPage)
-
+  //se o numero de pagina for 1, mostrar a apenas a pagina com os items filtrados
+  if*
 
   //metodo para abrir o modal de deleção
     function onOpenDeleteUserModal(selectedUser: User){
-      console.log('usuario selecionado para deletar no modal:', selectedUser)
-
       setSelectedUser(selectedUser)
-
       setShowDeleteModal(true)
     }
 
     //funcao para deletar o usuario de vez (botão deletar no modal)
   function onConfirmDeleteUser(selectedUser: User) {
-      console.log('usuario no on confirme delete user:', selectedUser)
       setRemoveUser(selectedUser)
     }
 
 
     function onEditUser(selectedUser: User){
-      ///quando eu clicar em editar, eu preciso enviar os dados do usuario selecionado para o formulario
-      console.log('usuario selecionado:',selectedUser);
-      console.log('tipo do usuario selecionado:', typeof selectedUser);
-
       setEditUser(selectedUser);
       navigate("/userForm")
-
     }
 
   //metodo para filtrar o input de texto
@@ -90,32 +70,34 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
       //guardando o valor do input no meu state que manipula o texto digitado 
       setUserInputText(userInput)
+
+      console.log('pagina atual no filtro de busca:',currentPage)
+      console.log('items por pagina no filtro de busca:',itemsPerPage)
+      console.log('lista apos filtro por nome:', searchUser)
+      console.log('qtde de lista apos filtro por nome:', searchUser.length)
   }
   
 
   //metodo para filtar o select de opcoes
   function onSortUsers(selectedOption: string) {
-    console.log("opcao selecionada:", selectedOption)
-
-    console.log('users apos selecionar uma opcao no select:', users)
 
     //se for idade crescente
     if(selectedOption === 'idadeCrescente'){
-      const sortHigherAge = users.sort((a, b)=> Number(a.age) - Number(b.age))
+      const sortHigherAge = searchUser.sort((a, b)=> Number(a.age) - Number(b.age))
       console.log(sortHigherAge)
       setSortUsers(selectedOption)
     }
 
     //se for idade decrescente 
     if(selectedOption === 'idadeDecrescente'){
-      const sortLowerAge = users.sort((a, b)=> Number(b.age) - Number(a.age))
+      const sortLowerAge = searchUser.sort((a, b)=> Number(b.age) - Number(a.age))
       console.log(sortLowerAge)
       setSortUsers(selectedOption)
     }
 
     //se for a-Z
     if(selectedOption === 'a-z'){
-      const sortAz = users.sort((a,b)=> {
+      const sortAz = searchUser.sort((a,b)=> {
         if(a.name > b.name) return 1
         return -1
       })
@@ -125,7 +107,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
     //se for z-A
     if(selectedOption === 'z-a'){
-      const sortZA = users.sort((a,b)=> {
+      const sortZA = searchUser.sort((a,b)=> {
         if(a.name > b.name) return -1
         return 1
       }) 
@@ -135,9 +117,6 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   }
 
   function onClearFilters(){
-    console.log('chamou o limpar filtros!')
-
-    console.log('lista original no clear filters:', users)
 
     //resgatando a lista original
     setSearchUser(users);
@@ -153,28 +132,13 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   function moveToNextPage(){
     
     if(currentPage >= totalPages){
-      console.log('a pagina atual é maior do que a quantidade de paginas, nao tem como ir para a proxima pagina')
       return;
     }
 
-    setCurrentPage(currentPage + 1)
-
-    //atualiza a lista de acordo com o que vai ser exibido na proxima pagina 
-    console.log('lista original de users:', users)
-    users = users.slice(currentPage, itemsPerPage)
-
-    console.log('lista paginada:', users)
-
-    //se o numero de usuarios da minha lista completa 
-    // for maior do que a quantidade de items por pagina,
-    if(users.length > itemsPerPage){
-      
-    }
-
+    setCurrentPage(currentPage + 1);
   }
 
   function moveToPreviousPage(){
-    //se a pagina atual for a primeira pagina, apenas da return
     if(currentPage === 1){
       return;
     } 
@@ -196,21 +160,22 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   }
 
   function calculateIndexes(){
-
     const lastIndexPage =  currentPage * itemsPerPage;
-    console.log('lastIndexPage:', lastIndexPage)
-    
     const firstIndexPage = lastIndexPage - itemsPerPage 
-    console.log('firstIndexPage:',firstIndexPage)
     
-    return users.slice(firstIndexPage, lastIndexPage)
-
+    return searchUser.slice(firstIndexPage, lastIndexPage)
   }
 
-    useEffect(()=> {
-      setSearchUser(users)
-    }, [users])
-  
+  useEffect(()=> {
+     setSearchUser(users);
+
+    //limpando o campo de input
+    setUserInputText('');
+
+    //limpando filtro de ordenação
+    setSortUsers('');
+  }, [users])
+
     return (
       <>
         <section className="list-container">
