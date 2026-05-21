@@ -59,7 +59,15 @@ const UsersPagination = ({currentPage, itemsPerPage, totalPages, moveToNextPage,
          className="pagination-number"
          >
         {pageNumbers.map((item, index)=> {
-            return(<span onClick={()=> onMoveToPageOnClick(item)} className={item === currentPage ? 'currentPage' : 'otherPages'} key={index}>{item}</span>)
+            return (
+              <span
+                onClick={() => onMoveToPageOnClick(item)}
+                className={item === currentPage ? "currentPage" : "otherPages"}
+                key={index}
+              >
+                {item}
+              </span>
+            );
         })}
         </div>
         
