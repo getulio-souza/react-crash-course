@@ -140,6 +140,8 @@ export function UserForm({ setUsers, editUser }: Props) {
 
   return (
     <>
+
+    <section className="form-container">
       <h1>Formulário de Cadastro</h1>
 
       <form onSubmit={SubmitForm}>
@@ -179,6 +181,8 @@ export function UserForm({ setUsers, editUser }: Props) {
         <button className="submit-btn" type="submit">Salvar</button>
         </div>
       </form>
+
+    </section>
     </>
   );
 }

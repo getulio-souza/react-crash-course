@@ -1,3 +1,10 @@
+.form-container{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* Container geral */
 form {
   max-width: 400px;
@@ -29,6 +36,7 @@ label {
   margin-bottom: 5px;
   font-size: 14px;
   color: #fff;
+  font-weight: 600;
 }
 
 /* Input */
