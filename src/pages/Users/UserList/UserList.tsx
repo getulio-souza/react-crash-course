@@ -175,6 +175,10 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
     return searchUser.slice(firstIndexPage, lastIndexPage);
   }
 
+  useEffect(() => {
+  setSearchUser(users);
+}, [users]);
+
   return (
     <>
       <section className="list-container">
