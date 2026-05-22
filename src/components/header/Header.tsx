@@ -27,14 +27,14 @@ function Header({setEditUser}: Props){
             <Link style={{textDecoration: 'none', color: '#fff'}} to={{pathname: "/"}}>
             <div className="users-category" onClick={navigateToUsersTable}>
                 <GridViewIcon/>
-                <span>Users List</span>
+                <span>Lista de Usuários</span>
             </div>
             </Link>
 
             <Link style={{textDecoration: 'none', color: '#fff'}} to={{pathname: "/userForm"}}>
             <div className="users-category" onClick={createUserForm}>
                 <DescriptionIcon/>
-                <span>Create User</span>
+                <span>Criar Novo Usuário</span>
             </div>
             </Link>
         </section>
