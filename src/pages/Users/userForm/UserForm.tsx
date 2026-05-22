@@ -140,7 +140,7 @@ export function UserForm({ setUsers, editUser }: Props) {
 
   return (
     <>
-      <h1>user Form</h1>
+      <h1>Formulário de Cadastro</h1>
 
       <form onSubmit={SubmitForm}>
         <div className="input-field">
