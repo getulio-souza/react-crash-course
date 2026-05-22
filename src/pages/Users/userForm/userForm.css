@@ -68,10 +68,21 @@ input::placeholder{
 
 }
 
-.submit-btn:hover{
-  background-color: white;
-  color: #2563eb;
+.cancel-btn{
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: rgb(203, 42, 42);;
+  color: white;
+  font-size: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: .5s;
   font-weight: 600;
+}
+
+.cancel-btn:hover, .submit-btn:hover{
+  opacity: 0.8;
 }
 
 .input-field input::placeholder{

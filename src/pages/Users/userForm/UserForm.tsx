@@ -134,6 +134,10 @@ export function UserForm({ setUsers, editUser }: Props) {
     setOccupation("");
   }
 
+  function backToUserList(){
+    navigate("/")
+  }
+
   return (
     <>
       <h1>user Form</h1>
@@ -169,8 +173,11 @@ export function UserForm({ setUsers, editUser }: Props) {
             type="text"
           />
         </div>
-
+        
+        <div className="btn-container">
+        <button className="cancel-btn" type="button" onClick={backToUserList}>Cancelar</button>
         <button className="submit-btn" type="submit">Salvar</button>
+        </div>
       </form>
     </>
   );
