@@ -16,12 +16,18 @@ export function UserForm({ setUsers, editUser }: Props) {
   const [age, setAge] = useState("");
   const [occupation, setOccupation] = useState("");
 
+  console.log('dados do usuario:', editUser)
+
   //para mostrar o usuario editado no formulario
   useEffect(() => {
     if (editUser) {
       setName(editUser.name || "");
       setAge(editUser.age || "");
       setOccupation(editUser.occupation || "");
+    } else{
+      setName("");
+      setAge("");
+      setOccupation("");
     }
   }, [editUser]);
 

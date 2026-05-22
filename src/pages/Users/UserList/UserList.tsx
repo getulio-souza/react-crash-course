@@ -6,7 +6,6 @@ import OrderList from '../../../components/OrderList/OrderList';
 import { useNavigate } from 'react-router-dom';
 import DeleteUserModal from '../../../components/DeleteUserModal/DeleteUserModal';
 import UsersPagination from '../../../components/Pagination/Pagination';
-import { CrueltyFree } from '@mui/icons-material';
 
 type Props = {
     users: User[];
@@ -30,7 +29,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
 
   //states para paginação
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(3);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
 
   //numero de páginas
   let totalPages = Math.ceil(searchUser.length / itemsPerPage)

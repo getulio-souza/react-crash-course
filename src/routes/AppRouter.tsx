@@ -27,7 +27,7 @@ function AppRouter() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <MainLayout />,
+      element: <MainLayout setEditUser={setEditUser} />,
       children: [
         {
           index: true,
