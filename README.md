@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+# 📋 Sistema de Cadastro de Usuários
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto foi desenvolvido utilizando React com TypeScript com o objetivo de praticar conceitos fundamentais do desenvolvimento Front-End. Durante a criação da aplicação, trabalhei na construção e reutilização de componentes, além da comunicação entre eles utilizando props, permitindo uma estrutura mais organizada e reutilizável.
 
-Currently, two official plugins are available:
+Também pratiquei o gerenciamento de estados utilizando o hook `useState`, que foi responsável por controlar informações como a lista de usuários cadastrados e os dados dos formulários. Outro ponto importante do projeto foi a utilização do `localStorage` para salvar os usuários cadastrados no navegador, garantindo que os dados permaneçam armazenados mesmo após atualizar ou fechar a página.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A aplicação permite cadastrar, listar e remover usuários através de uma interface simples e organizada, servindo como prática para consolidar conhecimentos em React, TypeScript, manipulação de estados, componentização e persistência de dados no Front-End.
 
-## React Compiler
+📋 Sistema de Cadastro de Usuários
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Projeto desenvolvido com foco em praticar conceitos fundamentais do React utilizando TypeScript.
 
-## Expanding the ESLint configuration
+🚀 Tecnologias utilizadas
+⚛️ React
+🔷 TypeScript
+🎨 CSS
+🪝 Hooks (useState)
+💾 LocalStorage
+📚 Objetivo do projeto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+O objetivo deste projeto foi praticar conceitos importantes do desenvolvimento Front-End com React, incluindo:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Criação e reutilização de componentes
+Comunicação entre componentes utilizando props
+Gerenciamento de estado com o hook useState
+Persistência de dados utilizando o localStorage
+Manipulação de listas de usuários
+Organização de estrutura de componentes
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+👨‍💻 Funcionalidades
+✅ Cadastro de usuários
+✅ Listagem de usuários cadastrados
+✅ Remoção de usuários
+✅ Persistência dos dados mesmo após atualizar a página
+✅ Interface simples e organizada
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+🧠 Conceitos praticados
+Props
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Utilizei props para enviar informações e funções entre componentes, permitindo uma comunicação organizada e reutilização de código.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+useState
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+O hook useState foi utilizado para controlar os estados da aplicação, como:
+
+Lista de usuários
+Campos do formulário
+Atualização dinâmica da interface
+LocalStorage
+
+Os usuários cadastrados são armazenados no localStorage, permitindo que os dados permaneçam salvos mesmo após fechar ou atualizar o navegador.
