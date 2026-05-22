@@ -156,11 +156,7 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
   }
 
   function moveToPageOnClick(selectedPage: number) {
-    if (selectedPage > currentPage) {
-      setCurrentPage(currentPage + 1);
-    } else {
-      setCurrentPage(currentPage - 1);
-    }
+    setCurrentPage(selectedPage)
   }
 
   function calculateIndexes() {

@@ -19,7 +19,6 @@ function AppRouter() {
 
   //função intermediaria para pegar o retorno de removeSelectedUser = updatedList
   function handleRemoveUser(user: User) {
-    console.log("retorno de user no handle remover user:", user);
     const updatedList = removeSelectedUser(user, users);
     setUsers(updatedList);
   }
