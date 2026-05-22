@@ -25,7 +25,7 @@ function DeleteUserModal({setShowDeleteModal, selectedUser, onConfirmDeleteUser}
         <article className='delete-modal-container'>
             <div className='close-modal-icon' onClick={onCancelDeleteUser}><CloseIcon/></div>
             <h3 className="delete-user-message">
-                Tem certeza que deseja excluir o usuario: <span style={{ color: 'red', marginBottom: '10px' }}>{selectedUser.name}</span>
+                Tem certeza que deseja excluir o usuario: <span style={{ color: 'red', marginBottom: '10px' }}>{selectedUser.name}</span> ?
             </h3>
           
             <div className="btn-container">
