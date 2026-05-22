@@ -74,4 +74,8 @@ input::placeholder{
   font-weight: 600;
 }
 
+.input-field input::placeholder{
+  color: grey;
+}
+
 

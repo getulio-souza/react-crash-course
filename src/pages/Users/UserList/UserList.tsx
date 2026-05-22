@@ -19,7 +19,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
   //filtros
   const [searchUser, setSearchUser] = useState<User[]>(users);
   const [userInputText, setUserInputText] = useState<string>('');
-  const [sortUsers, setSortUsers] = useState('');
+  const [sortUsers, setSortUsers] = useState<string>('');
 
   //select user
   const [selectedUser, setSelectedUser] = useState<User>();
@@ -49,6 +49,16 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     //funcao para deletar o usuario de vez (botão deletar no modal)
   function onConfirmDeleteUser(selectedUser: User) {
       setRemoveUser(selectedUser)
+
+      //atualiza a lista depois de remover 
+      const updatedUsers = users.filter(
+        user => user.id !== selectedUser.id
+    )
+
+    setSearchUser(updatedUsers);
+
+    setShowDeleteModal(false);
+
     }
 
 
@@ -167,15 +177,11 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
     return searchUser.slice(firstIndexPage, lastIndexPage)
   }
 
-  useEffect(()=> {
-     setSearchUser(users);
+  //use effect para sincronizar a listagem durante o recarregamento da página 
+  // useEffect(()=> {
+  //   localStorage.setItem("newUser", JSON.stringify(users))
+  // }, [users])
 
-    //limpando o campo de input
-    setUserInputText('');
-
-    //limpando filtro de ordenação
-    setSortUsers('');
-  }, [users])
 
     return (
       <>
@@ -194,7 +200,7 @@ export function UserList({users, setEditUser, setRemoveUser}: Props){
           {/* filtros */}
           <div className="filters-container">
             <UserFilter userInputText={userInputText} setSearchUser={onSearchUsers} />
-            <OrderList setSortUsers={onSortUsers} />
+            <OrderList setSortUsers={onSortUsers} sortUsers={sortUsers} />
             <button onClick={onClearFilters}>Clear Filters</button>
           </div>
 

@@ -139,38 +139,38 @@ export function UserForm({ setUsers, editUser }: Props) {
       <h1>user Form</h1>
 
       <form onSubmit={SubmitForm}>
-        <div>
-          <label htmlFor="">nome</label>
+        <div className="input-field">
+          <label htmlFor="">Nome</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="digite seu nome"
+            placeholder="Digite seu nome"
             name="name"
             type="text"
           />
         </div>
-        <div>
-          <label htmlFor="">idade</label>
+        <div className="input-field">
+          <label htmlFor="">Idade</label>
           <input
             value={age}
             onChange={(e) => setAge(e.target.value)}
-            placeholder="digite sua idade"
+            placeholder="Digite sua idade"
             name="age"
             type="text"
           />
         </div>
-        <div>
-          <label htmlFor="">ocupacao</label>
+        <div className="input-field">
+          <label htmlFor="">Ocupação</label>
           <input
             value={occupation}
             onChange={(e) => setOccupation(e.target.value)}
-            placeholder="digite sua profissão"
+            placeholder="Digite sua profissão"
             name="occupation"
             type="text"
           />
         </div>
 
-        <button className="submit-btn" type="submit">salvar dados</button>
+        <button className="submit-btn" type="submit">Salvar</button>
       </form>
     </>
   );

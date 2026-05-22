@@ -2,10 +2,11 @@ import "./OrderList.css"
 import type { ChangeEvent } from "react"
 
 type Props = {
+  sortUsers: string,
   setSortUsers: (selectedOption: any) => void
 }
 
-function OrderList({ setSortUsers }: Props) {
+function OrderList({ setSortUsers, sortUsers }: Props) {
   
   //funcao para pegar a opcao selecionada no select
   function onSelectOption(event: ChangeEvent<HTMLSelectElement>) {
@@ -14,7 +15,7 @@ function OrderList({ setSortUsers }: Props) {
 
   return (
     <>
-      <select onChange={onSelectOption} name="" id="">
+      <select value={sortUsers} onChange={onSelectOption} name="" id="">
         <option value="">Filtrar por:</option>
         <option value="a-z">Nome A-Z</option>
         <option value="z-a">Nome Z-A</option>
