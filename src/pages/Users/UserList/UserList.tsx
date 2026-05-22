@@ -175,6 +175,7 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
     return searchUser.slice(firstIndexPage, lastIndexPage);
   }
 
+  //sincronizando a lista para continuar aparecendo mesmo depois de recarregar a página
   useEffect(() => {
   setSearchUser(users);
 }, [users]);

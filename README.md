@@ -52,3 +52,6 @@ Atualização dinâmica da interface
 LocalStorage
 
 Os usuários cadastrados são armazenados no localStorage, permitindo que os dados permaneçam salvos mesmo após fechar ou atualizar o navegador.
+
+# Autor
+Getúlio de Souza
