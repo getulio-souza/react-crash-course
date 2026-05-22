@@ -79,11 +79,6 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
 
     //guardando o valor do input no meu state que manipula o texto digitado
     setUserInputText(userInput);
-
-    console.log("pagina atual no filtro de busca:", currentPage);
-    console.log("items por pagina no filtro de busca:", itemsPerPage);
-    console.log("lista apos filtro por nome:", searchUser);
-    console.log("qtde de lista apos filtro por nome:", searchUser.length);
   }
 
   //metodo para filtar o select de opcoes
@@ -109,7 +104,7 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
     //se for a-Z
     if (selectedOption === "a-z") {
       const sortAz = searchUser.sort((a, b) => {
-        if (a.name > b.name) return 1;
+        if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
         return -1;
       });
       console.log(sortAz);
@@ -119,7 +114,7 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
     //se for z-A
     if (selectedOption === "z-a") {
       const sortZA = searchUser.sort((a, b) => {
-        if (a.name > b.name) return -1;
+        if (a.name.toLocaleLowerCase() > b.name.toLowerCase()) return -1;
         return 1;
       });
       console.log(sortZA);
