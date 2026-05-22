@@ -16,6 +16,7 @@ Projeto desenvolvido com foco em praticar conceitos fundamentais do React utiliz
 🎨 CSS
 🪝 Hooks (useState)
 💾 LocalStorage
+
 📚 Objetivo do projeto
 
 O objetivo deste projeto foi praticar conceitos importantes do desenvolvimento Front-End com React, incluindo:
@@ -28,6 +29,7 @@ Manipulação de listas de usuários
 Organização de estrutura de componentes
 
 👨‍💻 Funcionalidades
+
 ✅ Cadastro de usuários
 ✅ Listagem de usuários cadastrados
 ✅ Remoção de usuários
@@ -35,6 +37,7 @@ Organização de estrutura de componentes
 ✅ Interface simples e organizada
 
 🧠 Conceitos praticados
+
 Props
 
 Utilizei props para enviar informações e funções entre componentes, permitindo uma comunicação organizada e reutilização de código.
