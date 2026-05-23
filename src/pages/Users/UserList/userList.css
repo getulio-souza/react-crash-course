@@ -1,7 +1,12 @@
 .list-container{
-  width: 1500px;
   margin: 0 auto;
   position: relative;
+}
+
+@media screen and (min-width: 1366px){
+  .list-container{
+    width: 1200px;
+  }
 }
 
 table {
