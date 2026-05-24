@@ -1,5 +1,5 @@
 import "./userList.css";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import type { User } from "../../../types/User";
 import UserFilter from "../../../components/usersFilter/UserFilter";
 import OrderList from "../../../components/OrderList/OrderList";
@@ -9,11 +9,21 @@ import UsersPagination from "../../../components/Pagination/Pagination";
 
 type Props = {
   users: User[];
-  setEditUser: (user: any) => void;
-  setRemoveUser: (user: any) => void;
+  setEditUser: (user: User) => void;
+  setRemoveUser: (user: User) => void;
 };
 
+type DeleteUserContextType = {
+    selectedUser: User | null;
+    setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+    onConfirmDeleteUser: (selectedUser: User | null) => void
+}
+
+//context para a açao de deletar usuario
+export const DeleteUserContext = createContext<DeleteUserContextType | null>(null);
+
 export function UserList({ users, setEditUser, setRemoveUser }: Props) {
+
   const navigate = useNavigate();
 
   //filtros
@@ -32,7 +42,7 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
 
   //numero de páginas
-  let totalPages = Math.ceil(searchUser.length / itemsPerPage);
+  const totalPages = Math.ceil(searchUser.length / itemsPerPage);
   console.log("numero de paginas:", totalPages);
 
   //se o numero de pagina for 1, mostrar a apenas a pagina com os items filtrados
@@ -177,11 +187,9 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
         {/* modal de deleção - verifica antes se o usuario selecionado existe */}
         {selectedUser
           ? showDeleteModal && (
-              <DeleteUserModal
-                setShowDeleteModal={setShowDeleteModal}
-                selectedUser={selectedUser}
-                onConfirmDeleteUser={onConfirmDeleteUser}
-              />
+            <DeleteUserContext.Provider value={{selectedUser, setShowDeleteModal, onConfirmDeleteUser}}>
+              <DeleteUserModal/>
+            </DeleteUserContext.Provider>
             )
           : null}
 

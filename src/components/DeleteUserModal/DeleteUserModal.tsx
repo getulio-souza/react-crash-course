@@ -1,14 +1,16 @@
 import CloseIcon from '@mui/icons-material/Close';
 import "./DeleteUserModal.css"
-import type { User } from '../../types/User';
+import { useContext } from 'react';
+import { DeleteUserContext } from '../../pages/Users/UserList/UserList';
 
-type Props = {
-  setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedUser: User;
-  onConfirmDeleteUser: (selectedUser: User) => void
-}
+function DeleteUserModal(){
+    
+    const deleteContext = useContext(DeleteUserContext)
 
-function DeleteUserModal({setShowDeleteModal, selectedUser, onConfirmDeleteUser}: Props){
+    if(!deleteContext) return null;
+
+    //destruturacao dos parametros passados para o useContext 
+    const {selectedUser, setShowDeleteModal, onConfirmDeleteUser} = deleteContext;
 
     function onCancelDeleteUser(){
       setShowDeleteModal(false);
