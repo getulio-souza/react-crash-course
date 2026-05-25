@@ -6,6 +6,7 @@ import OrderList from "../../../components/OrderList/OrderList";
 import { useNavigate } from "react-router-dom";
 import DeleteUserModal from "../../../components/DeleteUserModal/DeleteUserModal";
 import UsersPagination from "../../../components/Pagination/Pagination";
+import { userPagination } from "../../../hooks/usePagination";
 
 type Props = {
   users: User[];
@@ -37,18 +38,23 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
   //state para o modal de deleção
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  //states para paginação
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  //state para a paginação
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
 
-  //numero de páginas
-  const totalPages = Math.ceil(searchUser.length / itemsPerPage);
-  console.log("numero de paginas:", totalPages);
-
-  //se o numero de pagina for 1, mostrar a apenas a pagina com os items filtrados
-  if (totalPages === 1) {
-    moveToPreviousPage();
-  }
+  //pagination hook
+  const {
+    currentPage,
+    totalPages,
+    paginatedItems,
+    moveToNextPage,
+    moveToFirstPage,
+    moveToLastPage,
+    moveToPreviousPage,
+    moveToPageOnClick
+  } = userPagination({
+    items: searchUser,
+    itemsPerPage: 5
+  })
 
   //metodo para abrir o modal de deleção
   function onOpenDeleteUserModal(selectedUser: User) {
@@ -143,38 +149,10 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
     setSortUsers("");
   }
 
-  //funcao para mudar de pagina
-  function moveToNextPage() {
-    if (currentPage >= totalPages) return;
-    setCurrentPage(currentPage + 1);
-  }
+  //Logica para mudar de pagina
 
-  function moveToPreviousPage() {
-    if (currentPage === 1) return;
-    setCurrentPage(currentPage - 1);
-  }
 
-  function moveToFirstPage() {
-    if (currentPage === 1) return;
-    setCurrentPage(1);
-  }
-
-  function moveToLastPage() {
-    if (currentPage <= totalPages) {
-      setCurrentPage(totalPages);
-    }
-  }
-
-  function moveToPageOnClick(selectedPage: number) {
-    setCurrentPage(selectedPage)
-  }
-
-  function calculateIndexes() {
-    const lastIndexPage = currentPage * itemsPerPage;
-    const firstIndexPage = lastIndexPage - itemsPerPage;
-
-    return searchUser.slice(firstIndexPage, lastIndexPage);
-  }
+  
 
   //sincronizando a lista para continuar aparecendo mesmo depois de recarregar a página
   useEffect(() => {
@@ -222,7 +200,7 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
               </tr>
             )}
 
-            {calculateIndexes().map((user: User, index: any) => (
+            {paginatedItems.map((user: User, index: any) => (
               <tr key={index}>
                 <td data-label="id: ">{user?.id}</td>
                 <td data-label="nome: ">{user?.name}</td>

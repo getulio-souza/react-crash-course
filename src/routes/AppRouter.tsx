@@ -23,6 +23,8 @@ function AppRouter() {
     setUsers(updatedList);
   }
 
+  
+
   const router = createBrowserRouter([
     {
       path: "/",
