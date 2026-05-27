@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import DeleteUserModal from "../../../components/DeleteUserModal/DeleteUserModal";
 import UsersPagination from "../../../components/Pagination/Pagination";
 import { userPagination } from "../../../hooks/usePagination";
+import { FilterUsers } from "../../../hooks/FilterUsers";
 
 type Props = {
   users: User[];
@@ -56,6 +57,16 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
     itemsPerPage: 5
   })
 
+  //hook para o select de opções 
+  const {
+    filteredUsers,
+    selectedSortOption,
+    onSortUsers,
+  } = FilterUsers({
+    users: FilterUsers,
+    
+  })
+
   //metodo para abrir o modal de deleção
   function onOpenDeleteUserModal(selectedUser: User) {
     setSelectedUser(selectedUser);
@@ -97,47 +108,6 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
     setUserInputText(userInput);
   }
 
-  //metodo para filtar o select de opcoes
-  function onSortUsers(selectedOption: string) {
-    //se for idade crescente
-    if (selectedOption === "idadeCrescente") {
-      const sortHigherAge = searchUser.sort(
-        (a, b) => Number(a.age) - Number(b.age),
-      );
-      console.log(sortHigherAge);
-      setSortUsers(selectedOption);
-    }
-
-    //se for idade decrescente
-    if (selectedOption === "idadeDecrescente") {
-      const sortLowerAge = searchUser.sort(
-        (a, b) => Number(b.age) - Number(a.age),
-      );
-      console.log(sortLowerAge);
-      setSortUsers(selectedOption);
-    }
-
-    //se for a-Z
-    if (selectedOption === "a-z") {
-      const sortAz = searchUser.sort((a, b) => {
-        if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-        return -1;
-      });
-      console.log(sortAz);
-      setSortUsers(selectedOption);
-    }
-
-    //se for z-A
-    if (selectedOption === "z-a") {
-      const sortZA = searchUser.sort((a, b) => {
-        if (a.name.toLocaleLowerCase() > b.name.toLowerCase()) return -1;
-        return 1;
-      });
-      console.log(sortZA);
-      setSortUsers(selectedOption);
-    }
-  }
-
   function onClearFilters() {
     //resgatando a lista original
     setSearchUser(users);
@@ -148,11 +118,6 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
     //limpando filtro de ordenação
     setSortUsers("");
   }
-
-  //Logica para mudar de pagina
-
-
-  
 
   //sincronizando a lista para continuar aparecendo mesmo depois de recarregar a página
   useEffect(() => {
