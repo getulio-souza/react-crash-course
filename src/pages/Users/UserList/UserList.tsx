@@ -64,7 +64,7 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
     moveToPreviousPage,
     moveToPageOnClick
   } = userPagination({
-    items: filteredUsers,
+    items:  filteredUsers || users,
     itemsPerPage: 5
   })
 
@@ -124,7 +124,7 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
 
   //sincronizando a lista para continuar aparecendo mesmo depois de recarregar a página
   useEffect(() => {
-  setSearchUser(users);
+  setSearchUser(filteredUsers);
 }, [users]);
 
   return (
