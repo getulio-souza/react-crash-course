@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import DeleteUserModal from "../../../components/DeleteUserModal/DeleteUserModal";
 import UsersPagination from "../../../components/Pagination/Pagination";
 import { userPagination } from "../../../hooks/usePagination";
-import { FilterUsers } from "../../../hooks/FilterUsers";
+import {useFilterUsers } from "../../../hooks/FilterUsers";
 
 type Props = {
   users: User[];
@@ -62,9 +62,8 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
     filteredUsers,
     selectedSortOption,
     onSortUsers,
-  } = FilterUsers({
-    users: FilterUsers,
-    
+  } = useFilterUsers({
+    users,
   })
 
   //metodo para abrir o modal de deleção
