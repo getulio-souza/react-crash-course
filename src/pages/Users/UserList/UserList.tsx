@@ -42,7 +42,18 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
   //state para a paginação
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
 
-  //pagination hook
+
+  //hook para o select de opções - primeiro a ordenação
+  const {
+    filteredUsers,
+    selectedSortOption,
+    onSortUsers,
+  } = useFilterUsers({
+    users: searchUser,
+  })
+
+
+  //pagination hook - depois a paginação
   const {
     currentPage,
     totalPages,
@@ -53,18 +64,11 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
     moveToPreviousPage,
     moveToPageOnClick
   } = userPagination({
-    items: searchUser,
+    items: filteredUsers,
     itemsPerPage: 5
   })
 
-  //hook para o select de opções 
-  const {
-    filteredUsers,
-    selectedSortOption,
-    onSortUsers,
-  } = useFilterUsers({
-    users,
-  })
+  console.log('usuarios filtrados:', filteredUsers)
 
   //metodo para abrir o modal de deleção
   function onOpenDeleteUserModal(selectedUser: User) {
@@ -143,7 +147,10 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
             userInputText={userInputText}
             setSearchUser={onSearchUsers}
           />
-          <OrderList setSortUsers={onSortUsers} sortUsers={sortUsers} />
+          <OrderList 
+            setSortUsers={onSortUsers} 
+            sortUsers={selectedSortOption} 
+          />
           <button onClick={onClearFilters}>Clear Filters</button>
         </div>
 
