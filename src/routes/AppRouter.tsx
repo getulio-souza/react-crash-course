@@ -9,7 +9,7 @@ import MainLayout from "../layouts/MainLayout";
 function AppRouter() {
   const [users, setUsers] = useState<User[]>([]);
   const [editUser, setEditUser] = useState<User | null>(null);
-  const [removeUser, setRemoveUser] = useState<User | null>(null);
+  // const [removeUser, setRemoveUser] = useState<User | null>(null);
 
   useEffect(() => {
       const parsedUsers = JSON.parse(localStorage.getItem("newUser") || "[]");
@@ -22,8 +22,6 @@ function AppRouter() {
     const updatedList = removeSelectedUser(user, users);
     setUsers(updatedList);
   }
-
-  
 
   const router = createBrowserRouter([
     {
