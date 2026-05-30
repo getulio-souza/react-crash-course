@@ -16,7 +16,6 @@ function AppRouter() {
       setUsers(parsedUsers);
     }, []);
 
-
   //função intermediaria para pegar o retorno de removeSelectedUser = updatedList
   function handleRemoveUser(user: User) {
     const updatedList = removeSelectedUser(user, users);

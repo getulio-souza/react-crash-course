@@ -1,18 +1,27 @@
-import { useState } from "react"
+import { useContext } from "react"
+import { UserContext } from "../../layouts/MainLayout";
+import "./UserLogin.css"
 
 const UserLogin = () => {
 
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const userContext = useContext(UserContext);
+
+    if(!userContext) return null;
+
+    const {isLoggedIn, setIsLoggedIn} = userContext;
+
+    console.log('valor que chegou no user login:', isLoggedIn)
 
     const onSubmitLogin = () => {
         console.log('fez login')
-        setIsLoggedIn(true)
+        setIsLoggedIn(true);
     }
 
     return(
         <>
         <section>
-            <form onSubmit={onSubmitLogin} action="">
+             <h1>Welcome Back</h1>
+            <form onSubmit={onSubmitLogin}>
 
                 {/* email */}
                 <div className="input-container">
