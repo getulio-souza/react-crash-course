@@ -1,8 +1,11 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { UserContext } from "../../layouts/MainLayout";
 import "./UserLogin.css"
 
 const UserLogin = () => {
+
+    const [userEmail, setUserEmail] = useState<string>("");
+    const [userPassword, setUserPassword] = useState<string>("");
 
     const userContext = useContext(UserContext);
 
@@ -10,11 +13,21 @@ const UserLogin = () => {
 
     const {isLoggedIn, setIsLoggedIn} = userContext;
 
-    console.log('valor que chegou no user login:', isLoggedIn)
+    const onSubmitLogin = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
 
-    const onSubmitLogin = () => {
-        console.log('fez login')
-        setIsLoggedIn(true);
+        console.log(userEmail)
+        console.log(userPassword)
+
+        if(userEmail === ""){
+            return 'the email field could not be empty'
+        }
+
+        if(userPassword === ""){
+            return 'the password field could not by empty'
+        }
+
+
     }
 
     return(
@@ -26,13 +39,13 @@ const UserLogin = () => {
                 {/* email */}
                 <div className="input-container">
                     <label htmlFor="">Email</label>
-                    <input type="text" name="" id="" placeholder="type your email" />
+                    <input value={userEmail} onChange={(e)=> setUserEmail(e.target.value)} type="text" name="" id="" placeholder="type your email" />
                 </div>
 
                 {/* password */}
                 <div className="input-container">
                     <label htmlFor="">Password</label>
-                    <input type="text" name="" id="" placeholder="type your password" />
+                    <input value={userPassword} onChange={(e)=> setUserPassword(e.target.value)} type="text" name="" id="" placeholder="type your password" />
                 </div>
 
                 <button type="submit">{isLoggedIn === true ? 'Login' : 'Subscribe'}</button>
