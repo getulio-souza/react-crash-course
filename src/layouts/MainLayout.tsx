@@ -3,8 +3,8 @@ import Header from "../components/header/Header"
 import type { User } from "../types/User"
 import Footer from "../components/Footer/Footer";
 import "./MainLayout.css"
-import UserLogin from "../pages/Login/UserLogin";
 import { createContext, useState } from "react";
+import SubscribeUser from "../pages/SubscribeUser/SubscribeUser";
 
 type Props = {
     setEditUser: React.Dispatch<React.SetStateAction<User | null>>;
@@ -24,7 +24,7 @@ function MainLayout({setEditUser}: Props){
         <>
         
         <UserContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
-        <UserLogin/>
+        <SubscribeUser/>
         </UserContext.Provider>
 
        {/* isLoggedIn = false
