@@ -7,8 +7,7 @@ import {useFormik} from 'formik'
 
 const SubscribeUser = () => {
 
-    const [userEmail, setUserEmail] = useState<string>("");
-    const [userPassword, setUserPassword] = useState<string>("");
+    const [formData, setFormData] = useState
 
     const userContext = useContext(UserContext);
 
@@ -54,6 +53,20 @@ const SubscribeUser = () => {
     })
 
     console.log('formik:', formik)
+
+    function onLoggedInUser(){
+      // save the data from the inputs (name, email, password)
+      const formData = {
+        name: formik.values.userName,
+        email: formik.values.email,
+        password: formik.values.password
+      }
+
+
+
+      // navigate to usersList - first page
+      navigate('/', formData)
+    }
 
     return (
       <>
@@ -101,7 +114,7 @@ const SubscribeUser = () => {
               />
             </div>
 
-            <button type="submit">Subscribe</button>
+            <button onClick={onLoggedInUser} type="submit">Subscribe</button>
           </form>
         </section>
       </>
