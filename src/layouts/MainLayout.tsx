@@ -5,31 +5,20 @@ import Footer from "../components/Footer/Footer";
 import "./MainLayout.css"
 import { createContext, useState } from "react";
 import SubscribeUser from "../pages/SubscribeUser/SubscribeUser";
+import LoginUser from "../pages/LoginUser/LoginUser";
 
 type Props = {
     setEditUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
-type UserContext = {
-    isUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-export const UserContext = createContext<UserContext | false>(false);
-
 function MainLayout({setEditUser}: Props){
-
-    const [isLoggedIn, setIsLoggedIn] = useState<UserContext | false>(false);
 
     return(
         <>
-        
-        <UserContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
+        <LoginUser/>
         <SubscribeUser/>
-        </UserContext.Provider>
 
-       {/* isLoggedIn = false
-       !isLoggedIn = true */}
-        {isLoggedIn ? <section className="main-container">
+        <section className="main-container">
             <Header
                 setEditUser={setEditUser}
             />
@@ -37,8 +26,7 @@ function MainLayout({setEditUser}: Props){
             <Outlet/>
             </main>
             <Footer/>
-        </section> : ''}
-        
+        </section>
         </>
     )
 }

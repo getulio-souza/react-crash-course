@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import type { User } from "../types/User";
 import { removeSelectedUser } from "../services/usersService";
 import MainLayout from "../layouts/MainLayout";
+import LoginUser from "../pages/LoginUser/LoginUser";
+import SubscribeUser from "../pages/SubscribeUser/SubscribeUser";
 
 function AppRouter() {
   const [users, setUsers] = useState<User[]>([]);
@@ -27,6 +29,22 @@ function AppRouter() {
       path: "/",
       element: <MainLayout setEditUser={setEditUser} />,
       children: [
+
+        {
+          path: "subscribe-user",
+          element: (
+            <SubscribeUser/>
+          )
+        },
+
+        {
+          path: "login-user",
+          element: (
+            <LoginUser/>
+          )
+        },
+
+
         {
           index: true,
           element: (

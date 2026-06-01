@@ -1,5 +1,3 @@
-import { useContext, useState } from "react"
-import { UserContext } from "../../layouts/MainLayout";
 import "./SubscribeUser.css"
 import { useNavigate } from "react-router";
 import * as Yup from 'yup'
@@ -7,16 +5,7 @@ import {useFormik} from 'formik'
 
 const SubscribeUser = () => {
 
-    const [formData, setFormData] = useState
-
-    const userContext = useContext(UserContext);
-
     const navigate = useNavigate();
-
-    if(!userContext) return null;
-
-    const {isLoggedIn, setIsLoggedIn} = userContext;
-
 
     // form validation with yup
     const SignUpSchema = Yup.object().shape({
@@ -49,29 +38,22 @@ const SubscribeUser = () => {
         validationSchema: SignUpSchema,
         onSubmit: (values) => {
           console.log('submitted values:', values)
+
+          // navegando para a pagina home
+          navigate("/")
         }
     })
 
     console.log('formik:', formik)
 
-    function onLoggedInUser(){
-      // save the data from the inputs (name, email, password)
-      const formData = {
-        name: formik.values.userName,
-        email: formik.values.email,
-        password: formik.values.password
-      }
-
-
-
-      // navigate to usersList - first page
-      navigate('/', formData)
+    function goToSubscribeUser() {
+      navigate('/subscribe-user')
     }
 
     return (
       <>
         <section>
-          <h1>Welcome Back</h1>
+          <h1>Faça seu cadastro</h1>
           <form onSubmit={formik.handleSubmit}>
             
             
@@ -114,7 +96,9 @@ const SubscribeUser = () => {
               />
             </div>
 
-            <button onClick={onLoggedInUser} type="submit">Subscribe</button>
+            <button type="submit">Subscribe</button>
+            <span style={{color: 'black', marginRight: "10px"}}>Ainda não possui conta?</span>
+            <span style={{color: "red", textDecoration: "underline", cursor: "pointer"}} onClick={goToSubscribeUser}>faça seu cadastro</span>
           </form>
         </section>
       </>
