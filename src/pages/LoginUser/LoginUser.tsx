@@ -40,6 +40,11 @@ const LoginUser = () => {
 
     console.log('formik:', formik)
 
+    function goToSubscribeUser(){
+        navigate("/subscribe-user")
+    }
+    
+
     return (
       <>
         <section>
@@ -73,7 +78,10 @@ const LoginUser = () => {
             </div>
 
             <button type="submit">Login</button>
-            <span>Ainda não possui conta? <button>Faça seu cadastro</button></span>
+            <div style={{display: "flex", flexDirection: 'row', marginTop: '10px'}}>
+           <span style={{color: 'black', marginRight: "10px"}}>Ainda não possui conta?</span>
+            <span style={{color: "red", textDecoration: "underline", cursor: "pointer"}} onClick={goToSubscribeUser}>faça seu cadastro</span>
+            </div>
           </form>
         </section>
       </>
