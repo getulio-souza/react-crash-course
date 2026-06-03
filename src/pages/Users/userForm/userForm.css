@@ -29,7 +29,6 @@ h1 {
 form div {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
 }
 
 /* Label */

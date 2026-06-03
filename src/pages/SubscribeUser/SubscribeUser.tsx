@@ -8,7 +8,7 @@ import LoginUser from "../LoginUser/LoginUser";
 const SubscribeUser = () => {
 
   //variavel de estado para checar se o registro foi feito com sucesso
-  const [isUserSubscribed, setIsUserSubscribed] = useState<boolean>(false);
+  const [isUserSubscribed, setIsUserSubscribed] = useState<boolean>(true);
 
     const navigate = useNavigate();
 
@@ -39,13 +39,13 @@ const SubscribeUser = () => {
 
     // formik logic
     const formik = useFormik({
-        initialValues: {userName: '', email: '', password: ''},
+      initialValues: {userName: '', email: '', password: ''},
       validationSchema: SignUpSchema,
         
         onSubmit: (values) => {
           console.log('submitted values:', values)
 
-          setIsUserSubscribed(true);
+          setIsUserSubscribed(false);
         }
     })
 
@@ -57,15 +57,19 @@ const SubscribeUser = () => {
   
   console.log('status do cadastro do usuario:', isUserSubscribed)
 
+  console.log('isValid:', formik.isValid);
+console.log('errors:', formik.errors);
+console.log('values:', formik.values);
+
     return (
       <>
-        {!isUserSubscribed ? <section>
+        {isUserSubscribed ? <section>
           <h1>Faça seu cadastro</h1>
           <form onSubmit={formik.handleSubmit}>
             
             
             {/* userName */}
-            <div className="input-container">
+            <div className="input-container-subscribe">
               <label htmlFor="">User Name</label>
               <input
                 onChange={formik.handleChange}
@@ -75,10 +79,12 @@ const SubscribeUser = () => {
                 id="userName"
                 placeholder="type your name"
               />
+            {formik.errors.userName ? (<span style={{color: "red"}}>{formik.errors.userName}</span>) : null}
             </div>
 
+
             {/* email */}
-            <div className="input-container">
+            <div className="input-container-subscribe">
               <label htmlFor="">Email</label>
               <input
                 type="text"
@@ -88,10 +94,12 @@ const SubscribeUser = () => {
                 onChange={formik.handleChange}
                 value={formik.values.email}
               />
+            {formik.errors.email ? (<span style={{color: 'red'}}>{formik.errors.email}</span>) : null}
             </div>
 
+
             {/* password */}
-            <div className="input-container">
+            <div className="input-container-subscribe">
               <label htmlFor="">Password</label>
               <input
                 type="text"
@@ -101,11 +109,13 @@ const SubscribeUser = () => {
                 onChange={formik.handleChange}
                 value={formik.values.password}
               />
+            {formik.errors.password ? (<span style={{color: 'red'}}>{formik.errors.password}</span>) : null}
             </div>
 
-            <button disabled={!formik.isValid} type="submit">Subscribe</button>
 
-            <div style={{marginTop: "10px", display: "flex"}}>
+            <button type="submit">Subscribe</button>
+
+            <div style={{marginTop: "10px", display: "flex", flexDirection: "row"}}>
             <span style={{color: 'black', marginRight: "10px"}}>Já possui conta?</span>
             <span style={{color: "red", textDecoration: "underline", cursor: "pointer"}} onClick={goToLoginUser}>faça seu login</span>
             </div>

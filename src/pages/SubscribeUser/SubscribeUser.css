@@ -31,13 +31,13 @@ form h1 {
     color: #1e293b;
 }
 
-.input-container {
+.input-container-subscribe{
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
 }
 
-.input-container label {
+.input-container-subscribe label {
     margin-bottom: 8px;
     font-size: 14px;
     font-weight: 600;
