@@ -40,13 +40,12 @@ const SubscribeUser = () => {
     // formik logic
     const formik = useFormik({
         initialValues: {userName: '', email: '', password: ''},
-        validationSchema: SignUpSchema,
+      validationSchema: SignUpSchema,
+        
         onSubmit: (values) => {
           console.log('submitted values:', values)
 
-        if (formik.values.userName !== '' && formik.values.email !== "" && formik.values.password !== ''){
           setIsUserSubscribed(true);
-          }
         }
     })
 
@@ -60,7 +59,7 @@ const SubscribeUser = () => {
 
     return (
       <>
-        {isUserSubscribed ? <section>
+        {!isUserSubscribed ? <section>
           <h1>Faça seu cadastro</h1>
           <form onSubmit={formik.handleSubmit}>
             
@@ -104,11 +103,11 @@ const SubscribeUser = () => {
               />
             </div>
 
-            <button className={formik.values.userName === '' && formik.values.email === '' && formik.values.password === '' ? 'disabled-btn' : ''} type="submit">Subscribe</button>
+            <button disabled={!formik.isValid} type="submit">Subscribe</button>
 
-            <div style={{marginTop: "10px"}}>
-            <span style={{color: 'black', marginRight: "10px"}}>Ainda não possui conta?</span>
-            <span style={{color: "red", textDecoration: "underline", cursor: "pointer"}} onClick={goToLoginUser}>faça seu cadastro</span>
+            <div style={{marginTop: "10px", display: "flex"}}>
+            <span style={{color: 'black', marginRight: "10px"}}>Já possui conta?</span>
+            <span style={{color: "red", textDecoration: "underline", cursor: "pointer"}} onClick={goToLoginUser}>faça seu login</span>
             </div>
 
           </form>
