@@ -84,3 +84,8 @@ button:hover {
 button:active {
     transform: translateY(0);
 }
+
+.disabled-btn{
+  opacity: 0.6;
+  pointer-events: none;
+}

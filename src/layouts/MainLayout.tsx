@@ -18,10 +18,10 @@ function MainLayout({ setEditUser }: Props) {
 
   return (
     <>
-      <LoginUser />
+      {/* <LoginUser /> */}
       <SubscribeUser />
 
-      {!isUserLoggedIn ? (
+      {isUserLoggedIn ? (
         <section className="main-container">
           <Header setEditUser={setEditUser} />
           <main>

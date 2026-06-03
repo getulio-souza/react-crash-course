@@ -2,8 +2,13 @@ import "./SubscribeUser.css"
 import { useNavigate } from "react-router";
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
+import { useState } from "react";
+import LoginUser from "../LoginUser/LoginUser";
 
 const SubscribeUser = () => {
+
+  //variavel de estado para checar se o registro foi feito com sucesso
+  const [isUserSubscribed, setIsUserSubscribed] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
@@ -39,8 +44,9 @@ const SubscribeUser = () => {
         onSubmit: (values) => {
           console.log('submitted values:', values)
 
-          // navegando para a pagina home
-          navigate("/")
+        if (formik.values.userName !== '' && formik.values.email !== "" && formik.values.password !== ''){
+          setIsUserSubscribed(true);
+          }
         }
     })
 
@@ -48,11 +54,13 @@ const SubscribeUser = () => {
 
     function goToLoginUser() {
       navigate('/login-user')
-    }
+  }
+  
+  console.log('status do cadastro do usuario:', isUserSubscribed)
 
     return (
       <>
-        <section>
+        {isUserSubscribed ? <section>
           <h1>Faça seu cadastro</h1>
           <form onSubmit={formik.handleSubmit}>
             
@@ -96,11 +104,16 @@ const SubscribeUser = () => {
               />
             </div>
 
-            <button type="submit">Subscribe</button>
+            <button className={formik.values.userName === '' && formik.values.email === '' && formik.values.password === '' ? 'disabled-btn' : ''} type="submit">Subscribe</button>
+
+            <div style={{marginTop: "10px"}}>
             <span style={{color: 'black', marginRight: "10px"}}>Ainda não possui conta?</span>
             <span style={{color: "red", textDecoration: "underline", cursor: "pointer"}} onClick={goToLoginUser}>faça seu cadastro</span>
+            </div>
+
           </form>
-        </section>
+        </section> : <LoginUser/>}
+        
       </>
     );
 }
