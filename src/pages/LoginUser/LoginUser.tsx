@@ -2,8 +2,22 @@ import "./LoginUser.css"
 import { useNavigate } from "react-router";
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
+import { useContext } from "react";
+
+type UserContextStatus = {
+  isUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  isUserLoggedIn: () => void;
+  isUserSubscribed: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsUserSubscribed: () => void;
+}
 
 const LoginUser = () => {
+
+  //recebendo o contexto de subscribe e login criado no main layout
+  const userAuthContext = useContext<UserContextStatus>(UserStatusContext)
+
+  // fazendo a destruturando do userAuthContext
+  const { isUserLoggedIn, setIsUserLoggedIn, isUserSubscribed, setIsUserSubscribed } = userAuthContext;
 
     const navigate = useNavigate();
 
@@ -40,8 +54,11 @@ const LoginUser = () => {
 
     console.log('formik:', formik)
 
-    function goToSubscribeUser(){
-        navigate("/subscribe-user")
+  function goToSubscribeUser() {
+    //PRECISO OCULTAR O FORMULARIO DE LOGIN SE NAO ESTIVER LOGADO E NAVEGAR PARA A ROTA QUE LEVA PARA O COMPONENTE DE CADASTRO
+    setIsUserLoggedIn(false);
+    setIsUserSubscribed(true);
+    // navigate("/subscribe-user")
   }
     
     return (
