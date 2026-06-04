@@ -47,6 +47,7 @@ function AppRouter() {
 
         {
           index: true,
+          path: "/",
           element: (
             <UserList
               setEditUser={setEditUser}
