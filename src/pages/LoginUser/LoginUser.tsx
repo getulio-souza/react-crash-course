@@ -51,8 +51,9 @@ const LoginUser = () => {
           <h1>Welcome Back</h1>
           <form onSubmit={formik.handleSubmit}>
 
+            <article style={{marginBottom: "10px"}}>
             {/* email */}
-            <div className="input-container">
+            <div className="input-container" style={{marginBottom: "10px"}}>
               <label htmlFor="">Email</label>
               <input
                 type="text"
@@ -76,6 +77,7 @@ const LoginUser = () => {
                 value={formik.values.password}
               />
             </div>
+            </article>
 
             <button type="submit">Login</button>
             <div style={{display: "flex", flexDirection: 'row', marginTop: '10px'}}>
