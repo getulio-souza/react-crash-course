@@ -2,13 +2,11 @@ import "./SubscribeUser.css"
 import { useNavigate } from "react-router";
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
-import { useState } from "react";
-import LoginUser from "../LoginUser/LoginUser";
+import axios from "axios"
+
+const baseURL: string = '/register'
 
 const SubscribeUser = () => {
-
-  //variavel de estado para checar se o registro foi feito com sucesso
-  const [isUserSubscribed, setIsUserSubscribed] = useState<boolean>(true);
 
     const navigate = useNavigate();
 
@@ -46,6 +44,32 @@ const SubscribeUser = () => {
           console.log('submitted values:', values)
 
           setIsUserSubscribed(false);
+
+          //calling axios to autheticate (with user and password)
+          try {
+            const email = formik.values.email;
+            const password = formik.values.password;
+
+            const response = axios.post(
+              baseURL,
+              JSON.stringify({ email: email, password: password }),
+              {
+                headers: { "Context-type": "application/json" },
+                withCredentials: true
+              },
+            );
+
+            console.log('retorno response subscribe:', response.data)
+
+            setIsUserSubscribed(true);
+
+            navigate("/")
+          
+          } catch (error) {
+            console.error(error)
+          }
+
+
         }
     })
 
@@ -55,15 +79,13 @@ const SubscribeUser = () => {
       navigate('/login-user')
   }
   
-  console.log('status do cadastro do usuario:', isUserSubscribed)
-
   console.log('isValid:', formik.isValid);
 console.log('errors:', formik.errors);
 console.log('values:', formik.values);
 
     return (
       <>
-        {isUserSubscribed ? <section>
+        <section>
           <h1>Faça seu cadastro</h1>
           <form onSubmit={formik.handleSubmit}>
             
@@ -121,7 +143,7 @@ console.log('values:', formik.values);
             </div>
 
           </form>
-        </section> : <LoginUser/>}
+        </section>
         
       </>
     );

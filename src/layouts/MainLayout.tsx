@@ -4,8 +4,8 @@ import type { User } from "../types/User";
 import Footer from "../components/Footer/Footer";
 import "./MainLayout.css";
 import SubscribeUser from "../pages/SubscribeUser/SubscribeUser";
-import LoginUser from "../pages/LoginUser/LoginUser";
 import { useState } from "react";
+import LoginUser from "../pages/LoginUser/LoginUser";
 
 type Props = {
   setEditUser: React.Dispatch<React.SetStateAction<User | null>>;
@@ -14,14 +14,14 @@ type Props = {
 function MainLayout({ setEditUser }: Props) {
 
   // state para checar se o usuario esta logado
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(true);
+  const [isUserSubscribed, setIsUserSubscribed] = useState<boolean>(false);
 
   return (
     <>
-      {/* <LoginUser /> */}
-      <SubscribeUser />
-
-      {isUserLoggedIn ? (
+      {isUserLoggedIn ? (<LoginUser/>) : null}
+      {isUserSubscribed ? (<SubscribeUser/>) : null}
+      
         <section className="main-container">
           <Header setEditUser={setEditUser} />
           <main>
@@ -29,9 +29,6 @@ function MainLayout({ setEditUser }: Props) {
           </main>
           <Footer />
         </section>
-      ) : (
-        ""
-      )}
     </>
   );
 }

@@ -2,12 +2,8 @@ import "./LoginUser.css"
 import { useNavigate } from "react-router";
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
-import { useState } from "react";
 
 const LoginUser = () => {
-
-  //state para controlar a exibicao do formulario de login
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(true);
 
     const navigate = useNavigate();
 
@@ -34,12 +30,11 @@ const LoginUser = () => {
     const formik = useFormik({
         initialValues: {email: '', password: ''},
         validationSchema: SignUpSchema,
-        onSubmit: (values) => {
-          console.log('submitted values:', values)
-
-          setIsUserLoggedIn(false)
-
+      onSubmit: (values) => {
+          console.log(`chegou no submit `)
+          console.log('submitted values:', values)          
           navigate("/")
+          // setIsUserLoggedIn(false)
         }
     })
 
@@ -47,12 +42,11 @@ const LoginUser = () => {
 
     function goToSubscribeUser(){
         navigate("/subscribe-user")
-    }
+  }
     
-
     return (
       <>
-        {isUserLoggedIn ? (<section>
+        <section>
           <h1>Welcome Back</h1>
           <form onSubmit={formik.handleSubmit}>
 
@@ -92,7 +86,7 @@ const LoginUser = () => {
             <span style={{color: "red", textDecoration: "underline", cursor: "pointer"}} onClick={goToSubscribeUser}>faça seu cadastro</span>
             </div>
           </form>
-        </section>) : '' }
+        </section>
         
       </>
     );
