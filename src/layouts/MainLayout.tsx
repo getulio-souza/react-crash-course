@@ -27,7 +27,6 @@ function MainLayout({ setEditUser }: Props) {
       {isUserSubscribed ? (<SubscribeUser/>) : null}
       </UserStatusContext.Provider>
       
-      
         <section className="main-container">
           <Header setEditUser={setEditUser} />
           <main>

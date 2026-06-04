@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import DeleteUserModal from "../../../components/DeleteUserModal/DeleteUserModal";
 import UsersPagination from "../../../components/Pagination/Pagination";
 import { userPagination } from "../../../hooks/usePagination";
-import {useFilterUsers } from "../../../hooks/FilterUsers";
+import { useFilterUsers } from "../../../hooks/FilterUsers";
 
 type Props = {
   users: User[];
