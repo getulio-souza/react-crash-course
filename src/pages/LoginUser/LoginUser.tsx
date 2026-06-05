@@ -6,9 +6,7 @@ import { useContext } from "react";
 import {UserStatusContext} from '../../layouts/MainLayout'
 
 type UserContextStatus = {
-  isUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   isUserLoggedIn: () => void;
-  isUserSubscribed: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUserSubscribed: () => void;
 }
 
@@ -18,7 +16,7 @@ const LoginUser = () => {
   const userAuthContext = useContext<UserContextStatus>(UserStatusContext)
 
   // fazendo a destruturando do userAuthContext
-  const { isUserLoggedIn, setIsUserLoggedIn, isUserSubscribed, setIsUserSubscribed } = userAuthContext;
+  const { setIsUserLoggedIn, setIsUserSubscribed } = userAuthContext;
 
     const navigate = useNavigate();
 
@@ -49,7 +47,6 @@ const LoginUser = () => {
           console.log(`chegou no submit `)
           console.log('submitted values:', values)          
           navigate("/")
-          // setIsUserLoggedIn(false)
         }
     })
 

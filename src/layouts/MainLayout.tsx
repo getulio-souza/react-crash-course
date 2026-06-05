@@ -11,9 +11,10 @@ type Props = {
   setEditUser: React.Dispatch<React.SetStateAction<User | null>>;
 };
   
+//criando um contexto para armazenar o usuario cadastrado e logado
+export const UserStatusContext = createContext(null)
+
 function MainLayout({ setEditUser }: Props) {
-  //criando um contexto para armazenar o usuario cadastrado e logado
-  export const UserStatusContext = createContext(null)
 
   // state para checar se o usuario esta logado
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(true);
