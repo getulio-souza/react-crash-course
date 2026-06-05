@@ -9,14 +9,14 @@ import { UserStatusContext } from "../../layouts/MainLayout";
 const baseURL: string = "/register";
 
 type userStatus = {
-  setIsUserLoggedIn: () => void;
-  setIsUserSubscribed: () => void;
+  setIsUserOnLoginPage: () => void;
+  setIsUserOnSubscribePage: () => void;
 };
 
 const SubscribeUser = () => {
   const userStatusContext = useContext<userStatus>(UserStatusContext);
 
-  const { setIsUserLoggedIn, setIsUserSubscribed } = userStatusContext;
+  const { setIsUserOnLoginPage, setIsUserOnSubscribePage } = userStatusContext;
 
   const navigate = useNavigate();
 
@@ -83,8 +83,8 @@ const SubscribeUser = () => {
   console.log("formik:", formik);
 
   function goToLoginUser() {
-    setIsUserSubscribed(false);
-    setIsUserLoggedIn(true);
+    setIsUserOnSubscribePage(false);
+    setIsUserOnLoginPage(true);
   }
 
   console.log("isValid:", formik.isValid);

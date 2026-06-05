@@ -17,17 +17,19 @@ export const UserStatusContext = createContext(null)
 function MainLayout({ setEditUser }: Props) {
 
   // state para checar se o usuario esta logado
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(true);
-  const [isUserSubscribed, setIsUserSubscribed] = useState<boolean>(false);
+  const [isUserOnLoginPage, setIsUserOnLoginPage] = useState<boolean>(true);
+  const [isUserOnSubscribePage, setIsUserOnSubscribePage] = useState<boolean>(false);
 
   return (
     <>
       
-      <UserStatusContext.Provider value={{isUserLoggedIn, setIsUserLoggedIn, isUserSubscribed, setIsUserSubscribed}}>
-      {isUserLoggedIn ? (<LoginUser />) : null}
-      {isUserSubscribed ? (<SubscribeUser/>) : null}
+      <UserStatusContext.Provider value={{isUserOnLoginPage, setIsUserOnLoginPage, isUserOnSubscribePage, setIsUserOnSubscribePage}}>
+      {isUserOnLoginPage ? (<LoginUser />) : null}
+      {isUserOnSubscribePage ? (<SubscribeUser/>) : null}
       </UserStatusContext.Provider>
       
+      {/* essa secao com o header, a lista de usuarios, o formulario e o footer so podem aparecer quando o usuario entrar no sistema com email e senha */}
+
         <section className="main-container">
           <Header setEditUser={setEditUser} />
           <main>

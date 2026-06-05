@@ -6,8 +6,8 @@ import { useContext } from "react";
 import {UserStatusContext} from '../../layouts/MainLayout'
 
 type UserContextStatus = {
-  isUserLoggedIn: () => void;
-  setIsUserSubscribed: () => void;
+  setIsUserOnLoginPage: () => void;
+  setIsUserOnSubscribePage: () => void;
 }
 
 const LoginUser = () => {
@@ -16,7 +16,7 @@ const LoginUser = () => {
   const userAuthContext = useContext<UserContextStatus>(UserStatusContext)
 
   // fazendo a destruturando do userAuthContext
-  const { setIsUserLoggedIn, setIsUserSubscribed } = userAuthContext;
+  const { setIsUserOnLoginPage, setIsUserOnSubscribePage } = userAuthContext;
 
     const navigate = useNavigate();
 
@@ -54,8 +54,8 @@ const LoginUser = () => {
 
   function goToSubscribeUser() {
     //PRECISO OCULTAR O FORMULARIO DE LOGIN SE NAO ESTIVER LOGADO E NAVEGAR PARA A ROTA QUE LEVA PARA O COMPONENTE DE CADASTRO
-    setIsUserLoggedIn(false);
-    setIsUserSubscribed(true);
+    setIsUserOnLoginPage(false);
+    setIsUserOnSubscribePage(true);
     // navigate("/subscribe-user")
   }
     
