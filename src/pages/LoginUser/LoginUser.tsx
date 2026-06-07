@@ -2,23 +2,29 @@ import "./LoginUser.css"
 import { useNavigate } from "react-router";
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
-import { useContext } from "react";
-import {UserStatusContext} from '../../layouts/MainLayout'
+import React, { useContext } from "react";
+import {UserHomeContext, UserStatusContext} from '../../layouts/MainLayout'
 
-type UserContextStatus = {
-  setIsUserOnLoginPage: () => void;
-  setIsUserOnSubscribePage: () => void;
+type UserStateType = {
+  isUserOnLoginPage: boolean,
+  isUserOnSubscribePage: boolean,
+  setIsUserOnLoginPage: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsUserOnSubscribePage: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const LoginUser = () => {
 
   //recebendo o contexto de subscribe e login criado no main layout
-  const userAuthContext = useContext<UserContextStatus>(UserStatusContext)
+  const userAuthContext = useContext<UserStateType>(UserStatusContext)
 
   // fazendo a destruturando do userAuthContext
-  const { setIsUserOnLoginPage, setIsUserOnSubscribePage } = userAuthContext;
+  const {isUserOnLoginPage, setIsUserOnLoginPage, setIsUserOnSubscribePage } = userAuthContext;
 
-    const navigate = useNavigate();
+  //recebendo o contexto que exibe a home page na tela
+  const userHomePageContext = useContext(UserHomeContext)
+
+  //destruturando o homePageContext 
+  const {showHomePage, setShowHomePage} = userHomePageContext;
 
     // form validation with yup
     const SignUpSchema = Yup.object().shape({
@@ -43,20 +49,23 @@ const LoginUser = () => {
     const formik = useFormik({
         initialValues: {email: '', password: ''},
         validationSchema: SignUpSchema,
+
+      //aqui faz o login
       onSubmit: (values) => {
           console.log(`chegou no submit `)
-          console.log('submitted values:', values)          
-          navigate("/")
+          console.log('submitted values:', values)     
+          setIsUserOnLoginPage(false)     
+          setShowHomePage(true);
         }
     })
 
     console.log('formik:', formik)
 
   function goToSubscribeUser() {
-    //PRECISO OCULTAR O FORMULARIO DE LOGIN SE NAO ESTIVER LOGADO E NAVEGAR PARA A ROTA QUE LEVA PARA O COMPONENTE DE CADASTRO
+    //PRECISO OCULTAR O FORMULARIO DE LOGIN SE NAO ESTIVER LOGADO E
+    // NAVEGAR PARA A ROTA QUE LEVA PARA O COMPONENTE DE CADASTRO
     setIsUserOnLoginPage(false);
     setIsUserOnSubscribePage(true);
-    // navigate("/subscribe-user")
   }
     
     return (

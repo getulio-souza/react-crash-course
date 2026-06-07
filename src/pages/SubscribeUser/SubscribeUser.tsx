@@ -69,11 +69,12 @@ const SubscribeUser = () => {
           },
         );
 
-        console.log("retorno response subscribe:", response.data);
+        console.log("retorno response subscribe:", response);
 
-        setIsUserSubscribed(true);
+        setIsUserOnSubscribePage(true);
 
-        navigate("/");
+        navigate("/login-user");
+        
       } catch (error) {
         console.error(error);
       }
