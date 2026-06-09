@@ -18,10 +18,6 @@ type UserStatusType = {
   setIsUserOnSubscribePage: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-type UserHomeContextType = {
-  showHomePage: boolean;
-  setShowHomePage: React.Dispatch<React.SetStateAction<boolean>>;
-}
   
 //criando um contexto para armazenar o usuario cadastrado e logado
 export const UserStatusContext = createContext<UserStatusType>({
@@ -31,19 +27,13 @@ export const UserStatusContext = createContext<UserStatusType>({
   setIsUserOnSubscribePage: () => {}
 });
 
-//contexto para mostrar a pagina inicial
-export const UserHomeContext = createContext<UserHomeContextType>({
-  showHomePage: false,
-  setShowHomePage: () => {}
-});
-
 function MainLayout({ setEditUser }: Props) {
 
-  // state para checar se o usuario esta logado
   const [isUserOnLoginPage, setIsUserOnLoginPage] = useState<boolean>(true);
-  const [isUserOnSubscribePage, setIsUserOnSubscribePage] = useState<boolean>(false);
+  
+  console.log('MainLayout renderizou:', isUserOnLoginPage);
 
-  const [showHomePage, setShowHomePage] = useState<boolean>(false);
+  const [isUserOnSubscribePage, setIsUserOnSubscribePage] = useState<boolean>(false);
 
   return (
     <>
@@ -61,16 +51,15 @@ function MainLayout({ setEditUser }: Props) {
       
       {/* essa secao com o header, a lista de usuarios, o formulario e o footer so podem aparecer 
       quando o usuario entrar no sistema com email e senha */}
-
-        <UserHomeContext.Provider value={{showHomePage,setShowHomePage}}>
-        {showHomePage ? (<section className="main-container">
+      
+        {/* quando o usuario NAO estiver na tela de login, mostra a tela de home */}
+      {!isUserOnLoginPage ? (<section className="main-container">
           <Header setEditUser={setEditUser} />
           <main>
             <Outlet />
           </main>
           <Footer />
-        </section>): null}
-        </UserHomeContext.Provider>
+        </section>) : null}
         
     </>
   );

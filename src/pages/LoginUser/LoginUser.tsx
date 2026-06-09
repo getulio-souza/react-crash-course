@@ -1,9 +1,8 @@
 import "./LoginUser.css"
-import { useNavigate } from "react-router";
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 import React, { useContext } from "react";
-import {UserHomeContext, UserStatusContext} from '../../layouts/MainLayout'
+import {UserStatusContext} from '../../layouts/MainLayout'
 
 type UserStateType = {
   isUserOnLoginPage: boolean,
@@ -18,14 +17,8 @@ const LoginUser = () => {
   const userAuthContext = useContext<UserStateType>(UserStatusContext)
 
   // fazendo a destruturando do userAuthContext
-  const {isUserOnLoginPage, setIsUserOnLoginPage, setIsUserOnSubscribePage } = userAuthContext;
-
-  //recebendo o contexto que exibe a home page na tela
-  const userHomePageContext = useContext(UserHomeContext)
-
-  //destruturando o homePageContext 
-  const {showHomePage, setShowHomePage} = userHomePageContext;
-
+  const { isUserOnLoginPage, setIsUserOnLoginPage, setIsUserOnSubscribePage } = userAuthContext;
+  
     // form validation with yup
     const SignUpSchema = Yup.object().shape({
 
@@ -42,9 +35,6 @@ const LoginUser = () => {
         .required('Password is required'),
     }) 
 
-        console.log('SignUpSchema:', SignUpSchema)
-
-
     // formik logic
     const formik = useFormik({
         initialValues: {email: '', password: ''},
@@ -52,14 +42,14 @@ const LoginUser = () => {
 
       //aqui faz o login
       onSubmit: (values) => {
-          console.log(`chegou no submit `)
+          console.log('SUBMIT EXECUTOU');
           console.log('submitted values:', values)     
           setIsUserOnLoginPage(false)     
-          setShowHomePage(true);
         }
-    })
-
-    console.log('formik:', formik)
+      })
+      
+      console.log('isUserOnLoginPage no apos fazer login:', isUserOnLoginPage)
+  
 
   function goToSubscribeUser() {
     //PRECISO OCULTAR O FORMULARIO DE LOGIN SE NAO ESTIVER LOGADO E
@@ -70,7 +60,7 @@ const LoginUser = () => {
     
     return (
       <>
-        <section>
+        {isUserOnLoginPage ? (<section>
           <h1>Welcome Back</h1>
           <form onSubmit={formik.handleSubmit}>
 
@@ -110,8 +100,7 @@ const LoginUser = () => {
             <span style={{color: "red", textDecoration: "underline", cursor: "pointer"}} onClick={goToSubscribeUser}>faça seu cadastro</span>
             </div>
           </form>
-        </section>
-        
+        </section>) : null}
       </>
     );
 }

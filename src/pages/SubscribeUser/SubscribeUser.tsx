@@ -73,7 +73,7 @@ const SubscribeUser = () => {
 
         setIsUserOnSubscribePage(true);
 
-        navigate("/login-user");
+        navigate("/login");
         
       } catch (error) {
         console.error(error);

@@ -3,25 +3,39 @@ import { Link, useNavigate } from "react-router-dom";
 import GridViewIcon from "@mui/icons-material/GridView"
 import DescriptionIcon from "@mui/icons-material/Description"
 import type { User } from "../../types/User";
+// import { useContext } from "react";
+// import { HeaderContext } from "../../layouts/MainLayout";
 
 type Props = {
-    setEditUser: React.Dispatch<React.SetStateAction<User | null>>
-    
+  setEditUser: React.Dispatch<React.SetStateAction<User | null>>
 }
 
-function Header({setEditUser}: Props){
+function Header({ setEditUser}: Props) {
+  
+  // const headerContext = useContext(HeaderContext)
+
+  // const { showHeader, setShowHeader } = headerContext;
 
     const navigate = useNavigate();
 
-    function navigateToUsersTable(){}
-
     function createUserForm(){
-        setEditUser(null)
-        navigate("/userForm")
-    }
+      setEditUser(null)
+      navigate("/userForm")
+  }
+  
+  function goBackToLogin() {
+    //oculta o header
+    // navigate('/login')
+    setShowHeader(false)
+  }
+
+  // console.log(`header depois de fazer logout:`, showHeader)
+  function navigateToUsersTable() {
+    navigate('/')
+  }
 
     return(
-        <>
+      <>
         <section className="users-header-container">
             
             <Link style={{textDecoration: 'none', color: '#fff'}} to={{pathname: "/"}}>
@@ -36,8 +50,13 @@ function Header({setEditUser}: Props){
                 <DescriptionIcon/>
                 <span>Criar Novo Usuário</span>
             </div>
-            </Link>
+          </Link>
+          
+          <div onClick={goBackToLogin}>
+          <span style={{color: "white", textDecoration: "none"}}>logout</span>
+          </div>
         </section>
+        
         </>
     )
 }
