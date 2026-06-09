@@ -30,19 +30,19 @@ function AppRouter() {
       element: <MainLayout setEditUser={setEditUser} />,
       children: [
 
-        // {
-        //   path: "subscribe-user",
-        //   element: (
-        //     <SubscribeUser/>
-        //   )
-        // },
+        {
+          path: "subscribe-user",
+          element: (
+            <SubscribeUser/>
+          )
+        },
 
-        // {
-        //   path: "login",
-        //   element: (
-        //     <LoginUser/>
-        //   )
-        // },
+        {
+          path: "login",
+          element: (
+            <LoginUser/>
+          )
+        },
 
 
         {

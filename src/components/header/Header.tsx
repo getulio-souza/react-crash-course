@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import GridViewIcon from "@mui/icons-material/GridView"
 import DescriptionIcon from "@mui/icons-material/Description"
 import type { User } from "../../types/User";
-// import { useContext } from "react";
-// import { HeaderContext } from "../../layouts/MainLayout";
+import { useContext } from "react";
+import { HeaderContext } from "../../layouts/MainLayout";
 
 type Props = {
   setEditUser: React.Dispatch<React.SetStateAction<User | null>>
@@ -12,9 +12,9 @@ type Props = {
 
 function Header({ setEditUser}: Props) {
   
-  // const headerContext = useContext(HeaderContext)
+  const headerContext = useContext(HeaderContext)
 
-  // const { showHeader, setShowHeader } = headerContext;
+  const { showHeader, setShowHeader } = headerContext;
 
     const navigate = useNavigate();
 
@@ -29,6 +29,8 @@ function Header({ setEditUser}: Props) {
     setShowHeader(false)
   }
 
+  console.log("show header apos logout:", showHeader)
+
   // console.log(`header depois de fazer logout:`, showHeader)
   function navigateToUsersTable() {
     navigate('/')
@@ -36,7 +38,7 @@ function Header({ setEditUser}: Props) {
 
     return(
       <>
-        <section className="users-header-container">
+        {showHeader ? (<section className="users-header-container">
             
             <Link style={{textDecoration: 'none', color: '#fff'}} to={{pathname: "/"}}>
             <div className="users-category" onClick={navigateToUsersTable}>
@@ -52,10 +54,11 @@ function Header({ setEditUser}: Props) {
             </div>
           </Link>
           
-          <div onClick={goBackToLogin}>
-          <span style={{color: "white", textDecoration: "none"}}>logout</span>
+          <div>
+          <span onClick={goBackToLogin} style={{color: "white", textDecoration: "none"}}>logout</span>
           </div>
-        </section>
+        </section>) : null}
+        
         
         </>
     )

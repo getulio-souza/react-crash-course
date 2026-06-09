@@ -18,6 +18,11 @@ type UserStatusType = {
   setIsUserOnSubscribePage: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+type HeaderType = {
+  showHeader: boolean,
+  setShowHeader: React.Dispatch<React.SetStateAction<boolean>>
+}
+
   
 //criando um contexto para armazenar o usuario cadastrado e logado
 export const UserStatusContext = createContext<UserStatusType>({
@@ -27,13 +32,18 @@ export const UserStatusContext = createContext<UserStatusType>({
   setIsUserOnSubscribePage: () => {}
 });
 
+export const HeaderContext = createContext<HeaderType>({
+  showHeader: false,
+  setShowHeader: () => {}
+})
+
 function MainLayout({ setEditUser }: Props) {
 
   const [isUserOnLoginPage, setIsUserOnLoginPage] = useState<boolean>(true);
   
-  console.log('MainLayout renderizou:', isUserOnLoginPage);
-
   const [isUserOnSubscribePage, setIsUserOnSubscribePage] = useState<boolean>(false);
+
+  const [showHeader, setShowHeader] = useState<boolean>(true)
 
   return (
     <>
@@ -54,7 +64,9 @@ function MainLayout({ setEditUser }: Props) {
       
         {/* quando o usuario NAO estiver na tela de login, mostra a tela de home */}
       {!isUserOnLoginPage ? (<section className="main-container">
+        <HeaderContext value={{showHeader, setShowHeader}}>
           <Header setEditUser={setEditUser} />
+          </HeaderContext>
           <main>
             <Outlet />
           </main>
