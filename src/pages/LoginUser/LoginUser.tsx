@@ -2,22 +2,17 @@ import "./LoginUser.css"
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 import React, { useContext } from "react";
-import {UserStatusContext} from '../../layouts/MainLayout'
+import { useNavigate } from "react-router";
+import AuthContext from "../../context/AuthProvider";
 
-type UserStateType = {
-  isUserOnLoginPage: boolean,
-  isUserOnSubscribePage: boolean,
-  setIsUserOnLoginPage: React.Dispatch<React.SetStateAction<boolean>>,
-  setIsUserOnSubscribePage: React.Dispatch<React.SetStateAction<boolean>>
-}
+import axios from "../../api/axios"
+
 
 const LoginUser = () => {
 
-  //recebendo o contexto de subscribe e login criado no main layout
-  const userAuthContext = useContext<UserStateType>(UserStatusContext)
+  const { setAuth } = useContext(AuthContext);
 
-  // fazendo a destruturando do userAuthContext
-  const { isUserOnLoginPage, setIsUserOnLoginPage, setIsUserOnSubscribePage } = userAuthContext;
+  const navigate = useNavigate();
   
     // form validation with yup
     const SignUpSchema = Yup.object().shape({
@@ -44,23 +39,19 @@ const LoginUser = () => {
       onSubmit: (values) => {
           console.log('SUBMIT EXECUTOU');
           console.log('submitted values:', values)     
-          setIsUserOnLoginPage(false)     
+          console.log('navegou para home (lista de usuarios)')
+        navigate("/list")   
         }
       })
-      
-      console.log('isUserOnLoginPage no apos fazer login:', isUserOnLoginPage)
-  
 
   function goToSubscribeUser() {
-    //PRECISO OCULTAR O FORMULARIO DE LOGIN SE NAO ESTIVER LOGADO E
-    // NAVEGAR PARA A ROTA QUE LEVA PARA O COMPONENTE DE CADASTRO
-    setIsUserOnLoginPage(false);
-    setIsUserOnSubscribePage(true);
+    navigate("/register")
+    console.log('foi para a tela de cadastro')
   }
     
     return (
       <>
-        {isUserOnLoginPage ? (<section>
+        <section>
           <h1>Welcome Back</h1>
           <form onSubmit={formik.handleSubmit}>
 
@@ -100,7 +91,7 @@ const LoginUser = () => {
             <span style={{color: "red", textDecoration: "underline", cursor: "pointer"}} onClick={goToSubscribeUser}>faça seu cadastro</span>
             </div>
           </form>
-        </section>) : null}
+        </section>
       </>
     );
 }

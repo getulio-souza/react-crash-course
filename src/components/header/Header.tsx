@@ -3,8 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import GridViewIcon from "@mui/icons-material/GridView"
 import DescriptionIcon from "@mui/icons-material/Description"
 import type { User } from "../../types/User";
-import { useContext } from "react";
-import { HeaderContext } from "../../layouts/MainLayout";
 
 type Props = {
   setEditUser: React.Dispatch<React.SetStateAction<User | null>>
@@ -12,33 +10,28 @@ type Props = {
 
 function Header({ setEditUser}: Props) {
   
-  const headerContext = useContext(HeaderContext)
 
-  const { showHeader, setShowHeader } = headerContext;
 
     const navigate = useNavigate();
 
     function createUserForm(){
       setEditUser(null)
-      navigate("/userForm")
+      navigate("/form")
   }
   
   function goBackToLogin() {
-    //oculta o header
-    // navigate('/login')
-    setShowHeader(false)
+    navigate('/')
   }
 
-  console.log("show header apos logout:", showHeader)
 
   // console.log(`header depois de fazer logout:`, showHeader)
   function navigateToUsersTable() {
-    navigate('/')
+    navigate('/list')
   }
 
     return(
       <>
-        {showHeader ? (<section className="users-header-container">
+        <section className="users-header-container">
             
             <Link style={{textDecoration: 'none', color: '#fff'}} to={{pathname: "/"}}>
             <div className="users-category" onClick={navigateToUsersTable}>
@@ -47,7 +40,7 @@ function Header({ setEditUser}: Props) {
             </div>
             </Link>
 
-            <Link style={{textDecoration: 'none', color: '#fff'}} to={{pathname: "/userForm"}}>
+            <Link style={{textDecoration: 'none', color: '#fff'}} to={{pathname: "/form"}}>
             <div className="users-category" onClick={createUserForm}>
                 <DescriptionIcon/>
                 <span>Criar Novo Usuário</span>
@@ -57,9 +50,7 @@ function Header({ setEditUser}: Props) {
           <div>
           <span onClick={goBackToLogin} style={{color: "white", textDecoration: "none"}}>logout</span>
           </div>
-        </section>) : null}
-        
-        
+        </section>
         </>
     )
 }

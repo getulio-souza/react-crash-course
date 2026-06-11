@@ -8,6 +8,7 @@ import DeleteUserModal from "../../../components/DeleteUserModal/DeleteUserModal
 import UsersPagination from "../../../components/Pagination/Pagination";
 import { userPagination } from "../../../hooks/usePagination";
 import { useFilterUsers } from "../../../hooks/FilterUsers";
+import Header from "../../../components/header/Header";
 
 type Props = {
   users: User[];
@@ -90,7 +91,7 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
 
   function onEditUser(selectedUser: User) {
     setEditUser(selectedUser);
-    navigate("/userForm");
+    navigate("/form");
   }
 
   //metodo para filtrar o input de texto
@@ -129,6 +130,7 @@ export function UserList({ users, setEditUser, setRemoveUser }: Props) {
 
   return (
     <>
+      <Header/>
       <section className="list-container">
         {/* modal de deleção - verifica antes se o usuario selecionado existe */}
         {selectedUser

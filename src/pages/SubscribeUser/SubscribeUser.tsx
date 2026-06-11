@@ -3,20 +3,10 @@ import { useNavigate } from "react-router";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import axios from "axios";
-import { useContext } from "react";
-import { UserStatusContext } from "../../layouts/MainLayout";
 
 const baseURL: string = "/register";
 
-type userStatus = {
-  setIsUserOnLoginPage: () => void;
-  setIsUserOnSubscribePage: () => void;
-};
-
 const SubscribeUser = () => {
-  const userStatusContext = useContext<userStatus>(UserStatusContext);
-
-  const { setIsUserOnLoginPage, setIsUserOnSubscribePage } = userStatusContext;
 
   const navigate = useNavigate();
 
@@ -71,8 +61,6 @@ const SubscribeUser = () => {
 
         console.log("retorno response subscribe:", response);
 
-        setIsUserOnSubscribePage(true);
-
         navigate("/login");
         
       } catch (error) {
@@ -84,8 +72,7 @@ const SubscribeUser = () => {
   console.log("formik:", formik);
 
   function goToLoginUser() {
-    setIsUserOnSubscribePage(false);
-    setIsUserOnLoginPage(true);
+    navigate("/")
   }
 
   console.log("isValid:", formik.isValid);

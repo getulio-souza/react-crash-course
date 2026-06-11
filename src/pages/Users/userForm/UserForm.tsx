@@ -62,7 +62,7 @@ export function UserForm({ setUsers, editUser }: Props) {
       saveUsers(updatedUsers)
 
       //navegando para a tela de listagem de usuarios
-      navigate("/");
+      navigate("/list");
   
       clearForm();
     }
@@ -135,7 +135,7 @@ export function UserForm({ setUsers, editUser }: Props) {
   }
 
   function backToUserList(){
-    navigate("/")
+    navigate("/list")
   }
 
   return (

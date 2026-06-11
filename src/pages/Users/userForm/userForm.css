@@ -87,6 +87,7 @@ input::placeholder{
   cursor: pointer;
   transition: .5s;
   font-weight: 600;
+  margin-top: 10px;
 }
 
 .cancel-btn:hover, .submit-btn:hover{

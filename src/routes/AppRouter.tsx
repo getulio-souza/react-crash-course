@@ -4,7 +4,6 @@ import { UserForm } from "../pages/Users/userForm/UserForm";
 import { useEffect, useState } from "react";
 import type { User } from "../types/User";
 import { removeSelectedUser } from "../services/usersService";
-import MainLayout from "../layouts/MainLayout";
 import LoginUser from "../pages/LoginUser/LoginUser";
 import SubscribeUser from "../pages/SubscribeUser/SubscribeUser";
 
@@ -25,20 +24,16 @@ function AppRouter() {
   }
 
   const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainLayout setEditUser={setEditUser} />,
-      children: [
 
         {
-          path: "subscribe-user",
+          path: "register",
           element: (
             <SubscribeUser/>
           )
         },
 
         {
-          path: "login",
+          path: "",
           element: (
             <LoginUser/>
           )
@@ -46,8 +41,7 @@ function AppRouter() {
 
 
         {
-          index: true,
-          path: "/",
+          path: "list",
           element: (
             <UserList
               setEditUser={setEditUser}
@@ -58,7 +52,7 @@ function AppRouter() {
         },
         
         {
-          path: "userForm",
+          path: "form",
           element: (
             <UserForm
               setUsers={setUsers}
@@ -66,8 +60,6 @@ function AppRouter() {
             />
           ),
         },
-      ],
-    },
 
     {
       path: "*",
