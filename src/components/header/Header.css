@@ -25,3 +25,16 @@
 .users-category span{
     font-weight: 500;
 }
+
+.logout-btn{
+    color: white;
+    text-decoration: none;
+    cursor: poitner;
+    background-color: black;
+    padding: 10px;
+    transition: .5s;
+}
+
+.logout-btn:hover{
+    opacity: 0.7;
+}

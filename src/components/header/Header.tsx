@@ -48,7 +48,7 @@ function Header({ setEditUser}: Props) {
           </Link>
           
           <div>
-          <span onClick={goBackToLogin} style={{color: "white", textDecoration: "none"}}>logout</span>
+          <span className="logout-btn" onClick={goBackToLogin}>logout</span>
           </div>
         </section>
         </>
